@@ -1,230 +1,649 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="pt-BR">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Artools Precision Pen - A Caneta Mais Tecnológica do Mundo</title>
-    <meta name="description" content="Experimente a nova Artools Precision Pen. Desenhada para criadores." />
-
-    <!-- External Assets -->
-    <script src="templates/digital-architect.aura.build/assets/resource_3fa48481346f.js"></script>
-    <script src="templates/digital-architect.aura.build/assets/iconify-icon_d39ffc6e4c56.js"></script>
-    <link href="templates/digital-architect.aura.build/assets/css2_19fd9cc6b396.css" rel="stylesheet" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artools Precision Pen — A caneta mais tecnológica do mundo</title>
+    <meta name="description" content="Artools Precision Pen redefine o equilíbrio entre peso, fluxo e design. Feita para criadores que exigem perfeição em cada traço.">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Tailwind Configuration (Same as design_system.html) -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        base: '#FFFFFF',
-                        surface: '#FAFAFA',
-                        surface2: '#F4F4F5',
-                        obsidian: '#09090B',
-                        charcoal: '#1C1C1C',
-                        muted: '#71717A',
-                        borderLight: 'rgba(9, 9, 11, 0.08)',
-                        accent: '#09090B',
-                        neon: '#FF3300',
-                        glow: 'rgba(255, 51, 0, 0.15)'
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    
     <style>
-        html { overflow-x: hidden; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFFFF;
-            color: #1C1C1C;
-            -webkit-font-smoothing: antialiased;
+        /* ==========================================
+           1. RESET + VARIÁVEIS 
+           ========================================== */
+        :root {
+            --base: #FFFFFF;
+            --obsidian: #09090B;
+            --charcoal: #1C1C1C;
+            --muted: #71717A;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FFFFFF;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #E4E4E7;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #A1A1AA;
+        html {
+            font-family: var(--font-main);
+            background-color: var(--obsidian);
+            color: var(--base);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* Video specific fixes */
-        .video-container {
-            /* Fix rounding issues in some browsers */
-            transform: translateZ(0); 
+        body {
+            overflow-x: hidden;
+            width: 100vw;
+        }
+
+        /* Lenis Required CSS */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           2. HEADER
+           ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: #FFFFFF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-logo::before {
+            content: "";
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: #FFFFFF;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: #FFFFFF;
+            font-size: 13px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+
+        .header-nav a:hover {
+            opacity: 1;
+        }
+
+        .header-nav span.separator {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .header-cart {
+            font-size: 18px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .hamburger {
+            display: none;
+            color: #FFFFFF;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           3. HERO SECTION
+           ========================================== */
+        #hero {
+            position: relative;
+            width: 100%;
+            height: 400vh; /* Scrollable area */
+            background-color: var(--obsidian);
+        }
+
+        .hero-container {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ==========================================
+           4. VÍDEO + OVERLAY
+           ========================================== */
+        #hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateZ(0);
+            will-change: transform;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            /* Overlay em duas camadas como exigido */
+            background: 
+                linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
+                linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3) 100%);
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           5. HERO CONTENT & TEXTS
+           ========================================== */
+        .hero-content {
+            position: absolute;
+            top: 12%;
+            left: 8%;
+            max-width: 600px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 80vh; /* Centering helper within its constraints */
+        }
+
+        .hero-title {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 28px;
+            gap: 0;
+        }
+
+        .hero-title span {
+            display: block;
+            line-height: 1.05;
+        }
+
+        .hero-title .line-1 {
+            font-weight: 800;
+            color: #FFFFFF;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+        }
+
+        .hero-title .line-2 {
+            font-weight: 800;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+            letter-spacing: 3px;
+        }
+
+        .hero-title .line-3 {
+            font-weight: 800;
+            color: #FFFFFF;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+        }
+
+        /* ==========================================
+           6. PARÁGRAFO
+           ========================================== */
+        .hero-description {
+            font-weight: 400;
+            font-size: clamp(1rem, 1.4vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            max-width: 520px;
+            margin-top: 28px;
+            margin-bottom: 40px;
+        }
+
+        /* ==========================================
+           7. CTAs (BOTÕES)
+           ========================================== */
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-magnetic {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 54px;
+            padding: 0 40px;
+            border-radius: 999px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
             will-change: transform;
         }
-        
-        .overlay-text {
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-            opacity: 0;
-            transform: translateY(30px);
-            pointer-events: none; /* Let clicks pass to anything below if needed */
+
+        .btn-primary {
+            background-color: #FFFFFF;
+            color: #000000;
+            font-weight: 600;
+            border: none;
         }
 
-        .overlay-text.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
+        .btn-primary:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #FFFFFF;
+            font-weight: 500;
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==========================================
+           8. INDICADORES & PROMPT
+           ========================================== */
+        .hero-indicator {
+            position: absolute;
+            right: 4%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #progress-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .indicator-line {
+            width: 1px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-scroll span {
+            font-size: 11px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            animation: pulse-scroll 2s infinite;
+        }
+
+        .hero-scroll .scroll-line {
+            width: 1px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes pulse-scroll {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+
+        /* ==========================================
+           10. PARTÍCULAS (Opcional)
+           ========================================== */
+        .particles-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+        }
+
+        /* ==========================================
+           12. RESPONSIVO
+           ========================================== */
+        @media (max-width: 1024px) {
+            .hero-content {
+                left: 8%;
+                right: 8%;
+                max-width: none;
+                align-items: center;
+                text-align: center;
+            }
+            .hero-title .line-1, .hero-title .line-2, .hero-title .line-3 {
+                font-size: clamp(2.5rem, 5vw, 3.8rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav { display: none; }
+            .hamburger { display: block; }
+            
+            .hero-title .line-1, .hero-title .line-2, .hero-title .line-3 {
+                font-size: clamp(2rem, 8vw, 2.8rem);
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .btn-magnetic {
+                width: 100%;
+            }
+
+            .hero-indicator, .hero-scroll {
+                display: none; /* Oculto em mobile */
+            }
+        }
+
+        /* ==========================================
+           13. PREFERS REDUCED MOTION
+           ========================================== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Outras seções globais */
+        .next-section {
+            position: relative;
+            z-index: 20;
+            min-height: 100vh;
+            background-color: var(--obsidian);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
     </style>
 </head>
-
-<body class="antialiased selection:bg-obsidian selection:text-white">
-
-    <!-- HERO SCROLL CONTAINER -->
-    <!-- h-[400vh] provides 3 viewports of scrolling distance to animate the video -->
-    <div id="hero-scroll-container" class="relative w-full h-[400vh] bg-base">
-        
-        <!-- STICKY WRAPPER: Stays fixed to the viewport while scrolling the 400vh container -->
-        <section id="hero-section" class="sticky top-0 w-full h-screen overflow-hidden video-container flex items-center justify-center bg-obsidian">
-            
-            <!-- THE VIDEO -->
+<body>
+    
+    <!-- HEADER -->
+    <header role="banner">
+        <a href="#" class="header-logo">ARTOOLS.</a>
+        <nav class="header-nav" aria-label="Navegação Principal">
+            <a href="#">Design</a>
+            <span class="separator">|</span>
+            <a href="#">Technology</a>
+            <span class="separator">|</span>
+            <a href="#">Specs</a>
+        </nav>
+        <a href="#" class="header-cart" aria-label="Carrinho">👜</a>
+        <div class="hamburger">☰</div>
+    </header>
+    
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="hero-container">
+            <!-- VÍDEO -->
             <video 
                 id="hero-video" 
-                class="absolute inset-0 w-full h-full object-cover scale-[1.02]" 
                 src="assets/White_pen_writing__Crie._Desenhe…_202607081614.mp4" 
+                poster="assets/White_ARTOOLS_pen_floating_diago…_202607091112.jpeg"
                 muted 
                 playsinline 
                 preload="auto">
             </video>
-
-            <!-- DARK GRADIENT OVERLAY (ensures white text is readable regardless of video frame) -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 pointer-events-none z-10 mix-blend-multiply"></div>
-
-            <!-- TEXT OVERLAYS -->
-            <div class="relative z-20 w-full max-w-[1440px] px-8 md:px-16 mx-auto h-full flex flex-col justify-center items-center text-center text-white">
+            
+            <!-- OVERLAYS -->
+            <div class="hero-overlay"></div>
+            <div class="particles-layer"></div>
+            
+            <!-- CONTENT -->
+            <div class="hero-content">
+                <h1 class="hero-title" aria-label="A caneta mais tecnológica do mundo.">
+                    <span class="line-1">A caneta</span>
+                    <span class="line-2">mais tecnológica</span>
+                    <span class="line-3">do mundo.</span>
+                </h1>
                 
-                <!-- TEXT 1: Appears at start -->
-                <div id="text-1" class="absolute overlay-text visible">
-                    <h1 class="font-display text-6xl md:text-[120px] font-semibold tracking-tighter leading-none mb-6">
-                        Precision Pen
-                    </h1>
-                    <p class="text-xl md:text-3xl font-light tracking-wide text-white/90">
-                        A caneta mais tecnológica do mundo.
-                    </p>
+                <p class="hero-description">
+                    A Artools Precision Pen redefine o equilíbrio entre peso, fluxo e design. Feita para criadores que exigem perfeição em cada traço.
+                </p>
+                
+                <div class="hero-ctas">
+                    <button class="btn-primary btn-magnetic" aria-label="Comprar Artools Precision Pen">Comprar Agora</button>
+                    <button class="btn-secondary btn-magnetic" aria-label="Explorar produto">Explorar ↓</button>
                 </div>
-
-                <!-- TEXT 2: Appears in the middle -->
-                <div id="text-2" class="absolute overlay-text">
-                    <h2 class="font-display text-5xl md:text-[90px] font-semibold tracking-tighter leading-none mb-6">
-                        Crie. Desenhe. Sinta.
-                    </h2>
-                    <p class="text-lg md:text-2xl font-light max-w-2xl mx-auto text-white/90 leading-relaxed">
-                        Resposta instantânea, pressão milimétrica e acabamento em alumínio aeroespacial.
-                    </p>
-                </div>
-
-                <!-- TEXT 3: Appears at the end -->
-                <div id="text-3" class="absolute overlay-text">
-                    <span class="text-[12px] md:text-[14px] font-mono uppercase tracking-[0.3em] text-white/70 block mb-8">Pronta para o futuro</span>
-                    <h2 class="font-display text-5xl md:text-[90px] font-semibold tracking-tighter leading-none mb-10">
-                        Redefina seus traços.
-                    </h2>
-                    <button class="bg-white text-obsidian px-10 py-5 rounded-full font-semibold tracking-tight text-lg hover:scale-105 hover:bg-surface2 transition-all duration-300 shadow-2xl">
-                        Compre Agora
-                    </button>
-                </div>
-
             </div>
-        </section>
-    </div>
-
-    <!-- NEXT SECTION (Just a placeholder so the user can scroll past the hero) -->
-    <section class="relative z-30 w-full min-h-screen bg-obsidian flex flex-col items-center justify-center border-t border-white/10 px-8 text-center">
-        <h2 class="font-display text-5xl md:text-7xl font-semibold text-white tracking-tighter mb-6">O Próximo Capítulo.</h2>
-        <p class="text-muted text-xl md:text-2xl font-light max-w-xl">O conteúdo continua fluindo naturalmente aqui em baixo.</p>
+            
+            <!-- INDICATORS -->
+            <div class="hero-indicator" aria-hidden="true">
+                <span id="progress-text">01</span>
+                <div class="indicator-line"></div>
+            </div>
+            
+            <!-- PROMPT -->
+            <div class="hero-scroll" aria-hidden="true">
+                <span>SCROLL TO CONTROL</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- NEXT SECTION (Placeholder) -->
+    <section class="next-section">
+        <div style="text-align: center;">
+            <h2 style="font-weight: 600; font-size: 3rem; margin-bottom: 20px;">O fluxo continua</h2>
+            <p style="color: var(--muted); font-size: 1.2rem;">Conteúdo fluindo livremente após o parallax hero.</p>
+        </div>
     </section>
 
-    <!-- SCRIPT FOR SCROLL-DRIVEN VIDEO -->
+    <!-- SCRIPTS -->
     <script>
+        // Registrar ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
         const video = document.getElementById('hero-video');
-        const scrollContainer = document.getElementById('hero-scroll-container');
-        
-        const text1 = document.getElementById('text-1');
-        const text2 = document.getElementById('text-2');
-        const text3 = document.getElementById('text-3');
+        const heroSection = document.getElementById('hero');
+        const progressText = document.getElementById('progress-text');
+        const heroScrollPrompt = document.querySelector('.hero-scroll');
+        const isMobile = window.innerWidth < 768;
 
-        // Force pause
-        video.pause();
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Update video and texts based on scroll
-        function updateHeroOnScroll() {
-            const containerRect = scrollContainer.getBoundingClientRect();
-            
-            // How many pixels have we scrolled past the TOP of the container?
-            const scrollPixels = -containerRect.top;
-            
-            // The total distance we can scroll while the sticky section remains pinned
-            const scrollableHeight = containerRect.height - window.innerHeight;
-            
-            // Progress from 0.0 to 1.0
-            let progress = scrollPixels / scrollableHeight;
-            progress = Math.max(0, Math.min(1, progress));
-            
-            // Update Video Frame
-            if (video.readyState >= 1 && video.duration) {
-                // To avoid errors, we never hit exactly duration, but duration - 0.1
-                const maxTime = video.duration - 0.1;
-                video.currentTime = progress * maxTime;
+        /* ==========================================
+           1. LENIS SETUP
+           ========================================== */
+        let lenis;
+        if (!prefersReducedMotion && !isMobile) {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
             }
+            requestAnimationFrame(raf);
 
-            // --- Update Text Visibility ---
-            
-            // Text 1: 0% to 25%
-            if (progress >= 0 && progress < 0.25) {
-                text1.classList.add('visible');
-            } else {
-                text1.classList.remove('visible');
-            }
-
-            // Text 2: 35% to 60%
-            if (progress > 0.35 && progress < 0.6) {
-                text2.classList.add('visible');
-            } else {
-                text2.classList.remove('visible');
-            }
-
-            // Text 3: 70% to 100%
-            if (progress > 0.7) {
-                text3.classList.add('visible');
-            } else {
-                text3.classList.remove('visible');
-            }
-
-            requestAnimationFrame(updateHeroOnScroll);
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time)=>{
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0, 0);
         }
 
-        // Initialize when metadata loads to get correct duration
-        video.addEventListener('loadedmetadata', () => {
-            requestAnimationFrame(updateHeroOnScroll);
-        });
+        /* ==========================================
+           2. GSAP ENTRANCE TIMELINE
+           ========================================== */
+        if (!prefersReducedMotion) {
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-        // Also start loop immediately in case it's already cached
-        requestAnimationFrame(updateHeroOnScroll);
+            // Video Blur Reveal
+            gsap.fromTo(video, { filter: 'blur(8px)' }, { filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' });
+
+            // Header
+            tl.from('header', { y: -30, opacity: 0, duration: 0.8 }, 0.2);
+
+            // Headline
+            tl.from('.hero-title .line-1', { y: 60, opacity: 0, scale: 0.95, duration: 1.2 }, 0.6);
+            tl.from('.hero-title .line-2', { y: 60, opacity: 0, scale: 0.95, duration: 1.2 }, 0.9);
+            tl.from('.hero-title .line-3', { y: 60, opacity: 0, scale: 0.95, duration: 1.2 }, 1.2);
+
+            // Description
+            tl.from('.hero-description', { y: 40, opacity: 0, duration: 1 }, 1.6);
+
+            // Buttons
+            tl.from('.hero-ctas .btn-primary', { y: 30, opacity: 0, duration: 0.8 }, 2.0);
+            tl.from('.hero-ctas .btn-secondary', { y: 30, opacity: 0, duration: 0.8 }, 2.2);
+
+            // Indicators
+            if (!isMobile) {
+                tl.from('.hero-indicator', { opacity: 0, duration: 0.6 }, 2.0);
+                tl.from('.hero-scroll', { opacity: 0, duration: 0.6 }, 2.0);
+            }
+        }
+
+        /* ==========================================
+           3. VIDEO PARALLAX & PROMPT FADE
+           ========================================== */
+        if (!prefersReducedMotion && !isMobile) {
+            // Guarantee video metadata is loaded before creating ScrollTrigger
+            video.addEventListener('loadedmetadata', () => {
+                // Video Parallax Scrub
+                gsap.to(video, {
+                    currentTime: video.duration - 0.1, // Prevent ending errors
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            // Update Indicator (01 -> 02 -> 03)
+                            const prog = self.progress;
+                            if (prog < 0.33) progressText.innerText = "01";
+                            else if (prog < 0.66) progressText.innerText = "02";
+                            else progressText.innerText = "03";
+                        }
+                    }
+                });
+
+                // Fade out SCROLL TO CONTROL when user scrolls
+                gsap.to(heroScrollPrompt, {
+                    opacity: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: 'top top',
+                        end: '+=150', // fades out completely after 150px
+                        scrub: true
+                    }
+                });
+            });
+        } else if (prefersReducedMotion || isMobile) {
+            // Autoplay on mobile or reduced motion
+            video.autoplay = true;
+            video.loop = true;
+            video.play().catch(e => console.log('Autoplay blocked:', e));
+            // Remove the huge 400vh scroll height for a static block
+            heroSection.style.height = '100vh';
+        }
+
+        /* ==========================================
+           5. MAGNETIC BUTTONS
+           ========================================== */
+        if (!prefersReducedMotion && !isMobile) {
+            document.querySelectorAll('.btn-magnetic').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    // Cap the maximum magnetic pull to 8px
+                    const cappedX = Math.min(Math.max(x * 0.3, -8), 8);
+                    const cappedY = Math.min(Math.max(y * 0.3, -8), 8);
+
+                    gsap.to(btn, {
+                        x: cappedX,
+                        y: cappedY,
+                        duration: 0.4,
+                        ease: 'power2.out'
+                    });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.3)' });
+                });
+            });
+        }
     </script>
 </body>
 </html>
