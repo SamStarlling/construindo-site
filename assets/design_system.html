@@ -4,21 +4,21 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>AURA Design System - Premium Light Canvas</title>
-    <meta name="description" content="A premium, minimalist, and motion-driven design system featuring glassmorphism, transparent lettering, and rich micro-interactions. Built for high-fidelity web experiences." />
+    <title>Aura Design System - The Pure White Edition</title>
+    <meta name="description" content="A highly aesthetic, premium pure white design system featuring transparent lettering and rich micro-interactions." />
 
-    <!-- Style & Icon Assets from the project templates -->
+    <!-- External Assets: Digital Architect Template Base -->
     <script src="../templates/digital-architect.aura.build/assets/resource_3fa48481346f.js"></script>
     <script src="../templates/digital-architect.aura.build/assets/iconify-icon_d39ffc6e4c56.js"></script>
     <link href="../templates/digital-architect.aura.build/assets/css2_19fd9cc6b396.css" rel="stylesheet" />
 
-    <!-- Google Fonts CDNs for fallbacks and accent fonts -->
+    <!-- Google Fonts CDNs -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Tailwind Configuration -->
     <script>
-        // Extending Tailwind configuration to align with design tokens
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -28,28 +28,40 @@
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        canvas: '#EAEAE5',
-                        pure: '#FFFFFF',
-                        obsidian: '#09090b',
-                        charcoal: '#1C1C1C',
-                        muted: '#6B6B6B',
-                        accent: '#FF3300',
-                        acid: '#CCFF00',
-                        borderLight: 'rgba(28,28,28,0.15)',
+                        base: '#FFFFFF',          // Pure White
+                        surface: '#FAFAFA',       // Light Surface
+                        surface2: '#F4F4F5',      // Secondary Surface
+                        obsidian: '#09090B',      // Deep Black
+                        charcoal: '#1C1C1C',      // Standard Text
+                        muted: '#71717A',         // Muted Text
+                        borderLight: 'rgba(9, 9, 11, 0.08)',
+                        accent: '#09090B',        // Primary action
+                        neon: '#FF3300',          // Accent interaction
+                        glow: 'rgba(255, 51, 0, 0.15)'
                     },
                     animation: {
-                        'spin-slow': 'spin 12s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'morph': 'morph 8s ease-in-out infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'morph': 'morph 12s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                        'slideUp': 'slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' }
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' }
                         },
                         morph: {
                             '0%, 100%': { borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' },
                             '50%': { borderRadius: '70% 30% 50% 70% / 50% 60% 30% 60%' }
+                        },
+                        shimmer: {
+                            '0%': { transform: 'translateX(-150%) skewX(-15deg)' },
+                            '100%': { transform: 'translateX(200%) skewX(-15deg)' }
+                        },
+                        slideUpFade: {
+                            '0%': { opacity: 0, transform: 'translateY(40px) scale(0.98)', filter: 'blur(5px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0)' }
                         }
                     }
                 }
@@ -58,155 +70,92 @@
     </script>
 
     <style>
+        /* =========================================
+           1. CORE STYLES & RESET
+           ========================================= */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #EAEAE5;
+            background-color: #FFFFFF;
             color: #1C1C1C;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Scroll Progress Bar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E4E4E7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A1A1AA;
+        }
+
+        /* Scroll Progress */
         #scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, #FF3300, #CCFF00);
+            background: #09090B;
             width: 0%;
             z-index: 9999;
             transition: width 0.1s ease;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* =========================================
+           2. TYPOGRAPHY & LETTERING FX
+           ========================================= */
+        .text-transparent-stroke {
+            color: transparent;
+            -webkit-text-stroke: 1.5px #09090B;
+            transition: all 0.5s ease;
         }
-        ::-webkit-scrollbar-track {
-            background: #EAEAE5;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #6B6B6B;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #1C1C1C;
-        }
-
-        /* Base Reveal Animation (Scroll triggered) */
-        .reveal {
-            opacity: 0;
-            transform: translateY(2.5rem);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        .text-transparent-stroke:hover {
+            -webkit-text-stroke: 2px #09090B;
+            color: rgba(9, 9, 11, 0.05);
+            text-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Masked Text Reveal (For Hero Title) */
         .text-reveal-wrapper {
             overflow: hidden;
             display: inline-block;
             vertical-align: bottom;
         }
-
         .text-reveal-content {
             transform: translateY(110%);
             opacity: 0;
-            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s ease;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
             display: block;
         }
-
         .reveal-active .text-reveal-content {
             transform: translateY(0);
             opacity: 1;
         }
 
-        /* Grid Background Pattern */
-        .grid-bg {
-            background-size: 40px 40px;
-            background-image:
-                linear-gradient(to right, rgba(28, 28, 28, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(28, 28, 28, 0.04) 1px, transparent 1px);
-        }
-
-        /* Shimmer Beam Button Animation */
-        .beam-button {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .beam-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-            transition: left 0.6s ease-in-out;
-        }
-
-        .beam-button:hover::before {
-            left: 100%;
-        }
-
-        /* Flashlight Cursor Tracker Card */
-        .flashlight-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(28, 28, 28, 0.15);
-            overflow: hidden;
-        }
-
-        .flashlight-card::before {
-            content: "";
-            position: absolute;
-            inset: 0px;
-            background: radial-gradient(
-                450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255, 51, 0, 0.08),
-                transparent 40%
-            );
+        /* =========================================
+           3. ANIMATIONS & REVEALS
+           ========================================= */
+        .reveal {
             opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: 1;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .flashlight-card:hover::before {
+        .reveal.active {
             opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Border Hover Transition */
-        .border-grow-input {
-            position: relative;
-        }
-        .border-grow-input::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #FF3300;
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-        .border-grow-input:focus-within::after {
-            width: 100%;
-            left: 0;
-        }
-
-        /* Checkbox SVG Draw Animation */
-        .checkbox-draw svg path {
-            stroke-dasharray: 20;
-            stroke-dashoffset: 20;
-            transition: stroke-dashoffset 0.3s ease-out;
-        }
-        input:checked ~ .checkbox-box svg path {
-            stroke-dashoffset: 0;
-        }
+        /* Stagger Delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-500 { transition-delay: 0.5s; }
+        .delay-700 { transition-delay: 0.7s; }
 
         /* Infinite Marquee */
         @keyframes scrollMarquee {
@@ -216,1076 +165,646 @@
         .marquee-track {
             display: flex;
             width: max-content;
-            animation: scrollMarquee 35s linear infinite;
+            animation: scrollMarquee 30s linear infinite;
         }
 
-        /* Custom Glassmorphism Panels */
+        /* =========================================
+           4. COMPONENTS FX
+           ========================================= */
+        /* Beam Button */
+        .beam-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .beam-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-150%) skewX(-15deg);
+            animation: shimmer 3s infinite;
+        }
+
+        /* Border Grow Input */
+        .input-grow-wrapper {
+            position: relative;
+        }
+        .input-grow-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #09090B;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .input-grow-wrapper:focus-within::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Glassmorphism */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
         }
 
-        .glass-panel-dark {
-            background: rgba(9, 9, 11, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Stagger Delays */
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-        .delay-400 { transition-delay: 0.4s; }
-        .delay-500 { transition-delay: 0.5s; }
-        .delay-700 { transition-delay: 0.7s; }
-
-        /* Custom Toast Notification */
-        .toast-notify {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            transform: translateY(150%);
+        /* Modal Overlay */
+        .modal-overlay {
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
         }
-        .toast-notify.show {
-            transform: translateY(0);
+        .modal-overlay.active {
             opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.active .modal-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Abstract Glow */
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            z-index: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 
-<body class="antialiased min-h-screen selection:bg-stone-900 selection:text-white pb-16 grid-bg">
+<body class="antialiased min-h-screen selection:bg-obsidian selection:text-white">
 
-    <!-- Scroll Progress Indicator -->
+    <!-- Scroll Progress -->
     <div id="scroll-progress"></div>
 
-    <!-- Clipboard Toast Alert -->
-    <div id="toast-alert" class="toast-notify glass-panel-dark text-white px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3">
-        <iconify-icon class="text-xl text-acid" icon="solar:check-circle-bold-duotone"></iconify-icon>
-        <span class="text-xs font-mono tracking-wide" id="toast-message">Copiado para a área de transferência!</span>
-    </div>
+    <!-- Main Container -->
+    <div class="max-w-[1440px] mx-auto border-x border-borderLight relative bg-base min-h-screen shadow-2xl">
 
-    <!-- Main Wrapper with vertical gridlines -->
-    <div class="max-w-[1400px] mx-auto border-x border-stone-300/60 relative bg-[#EAEAE5]/90 min-h-screen shadow-stone-400/50 shadow-2xl">
-
-        <!-- Structural Grid Guide Lines -->
-        <div class="absolute inset-0 pointer-events-none grid grid-cols-1 md:grid-cols-12 gap-0 z-0 h-full w-full">
-            <div class="hidden md:block md:col-span-3 border-r border-stone-300/25 h-full"></div>
-            <div class="hidden md:block md:col-span-6 border-r border-stone-300/25 h-full"></div>
-            <div class="hidden md:block md:col-span-3 h-full"></div>
+        <!-- Grid Lines Pattern (Subtle) -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <div class="w-full h-full" style="background-image: linear-gradient(to right, rgba(9,9,11,0.03) 1px, transparent 1px); background-size: 10vw 100%;"></div>
         </div>
 
-        <!-- Sticky Header Navigation -->
-        <header id="main-nav" class="relative z-50 border-b border-stone-300 sticky top-0 bg-[#EAEAE5]/80 backdrop-blur-md transition-all duration-300">
-            <div class="flex justify-between items-center px-4 md:px-8 py-4">
+        <!-- Sticky Header -->
+        <header class="relative z-50 border-b border-borderLight sticky top-0 bg-white/80 backdrop-blur-md transition-all duration-300">
+            <div class="flex justify-between items-center px-6 md:px-10 py-5">
                 <nav class="flex items-center gap-8">
-                    <a class="text-xs font-mono uppercase tracking-widest text-stone-900 hover:text-accent transition-colors" href="#typography">Typography</a>
-                    <a class="text-xs font-mono uppercase tracking-widest text-stone-900 hover:text-accent transition-colors" href="#colors">Colors</a>
-                    <a class="text-xs font-mono uppercase tracking-widest text-stone-900 hover:text-accent transition-colors hidden md:block" href="#components">Components</a>
+                    <a class="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-obsidian transition-colors" href="#hero">Start</a>
+                    <a class="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-obsidian transition-colors" href="#typography">Type</a>
+                    <a class="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-obsidian transition-colors hidden md:block" href="#colors">Color</a>
+                    <a class="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-obsidian transition-colors hidden md:block" href="#components">System</a>
                 </nav>
-                <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                    <iconify-icon class="text-2xl text-stone-900 group-hover:rotate-180 transition-transform duration-700" icon="solar:atom-bold-duotone"></iconify-icon>
-                    <span class="font-bold tracking-widest text-base font-sans text-stone-900">AURA</span>
+                <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <iconify-icon class="text-xl text-obsidian group-hover:rotate-180 transition-transform duration-700" icon="solar:infinity-bold-duotone"></iconify-icon>
+                    <span class="font-bold tracking-widest text-sm font-sans text-obsidian uppercase">Aura Pure</span>
                 </div>
-                <div class="flex items-center gap-8">
-                    <a class="text-xs font-mono uppercase tracking-widest text-stone-900 hidden md:block hover:text-accent transition-colors" href="#icons">Icons</a>
-                    <a class="text-xs font-mono uppercase tracking-widest text-stone-900 hover:text-accent transition-colors" href="#motion">Motion</a>
-                    <a class="text-xs font-mono uppercase tracking-widest text-accent hover:text-stone-900 transition-colors flex items-center gap-1" href="index.html">
-                        <span>Back</span>
-                        <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
-                    </a>
+                <div class="flex items-center gap-4">
+                    <button class="beam-button px-5 py-2.5 bg-obsidian text-white text-[10px] font-mono uppercase tracking-widest rounded-sm hover:bg-charcoal transition-colors">
+                        Download Kit
+                    </button>
                 </div>
             </div>
         </header>
 
-        <!-- 0) HERO DEMONSTRATION SECTION -->
-        <section class="relative z-10 grid grid-cols-1 md:grid-cols-12 border-b border-stone-300 min-h-[700px] overflow-hidden">
-            <!-- Background Video/Image Container -->
-            <div class="absolute inset-0 z-0">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover grayscale opacity-75 contrast-125">
-                    <source src="White_pen_writing__Crie._Desenhe._202607081614.mp4" type="video/mp4" />
-                    <!-- Fallback Image if video fails -->
-                    <img src="White_ARTOOLS_pen_floating_diago._202607091112.jpeg" alt="Aura Canvas" class="w-full h-full object-cover grayscale opacity-80" />
-                </video>
-                <!-- Complex overlays for text readability and high aesthetics -->
-                <div class="absolute inset-0 bg-gradient-to-r from-pure/95 via-pure/60 to-transparent"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-canvas via-transparent to-pure/20"></div>
-            </div>
+        <!-- =========================================
+             SECTION 0: HERO (THE DEMONSTRATION FOLD)
+             ========================================= -->
+        <section id="hero" class="relative z-10 min-h-[85vh] flex items-center justify-center border-b border-borderLight overflow-hidden">
+            
+            <!-- Animated Background Blobs -->
+            <div class="glow-blob bg-stone-200 w-[500px] h-[500px] top-10 -left-20 animate-morph mix-blend-multiply"></div>
+            <div class="glow-blob bg-zinc-100 w-[600px] h-[600px] bottom-10 -right-20 animate-float mix-blend-multiply delay-500"></div>
 
-            <!-- Left Interactive Content Hero (Col 9) -->
-            <div class="col-span-1 md:col-span-9 border-b md:border-b-0 md:border-r border-stone-300 relative z-10 flex flex-col justify-between p-8 md:p-12">
-                <div class="max-w-xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 border border-stone-900/10 rounded-full text-xs font-mono uppercase bg-pure/45 backdrop-blur-md mb-6 shadow-sm reveal delay-100">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                        <span>Evolution Release v2.0</span>
+            <div class="relative z-10 w-full px-6 md:px-20 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+                <!-- Text Content -->
+                <div class="col-span-1 md:col-span-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 border border-borderLight rounded-full text-[10px] font-mono uppercase bg-white/50 backdrop-blur-md mb-8 shadow-sm reveal delay-100">
+                        <span class="w-1.5 h-1.5 rounded-full bg-obsidian animate-pulse"></span>
+                        <span>Design System v4.0 — White Edition</span>
                     </div>
-                </div>
 
-                <div class="my-auto py-12">
-                    <h1 class="text-6xl md:text-8xl font-semibold tracking-tighter leading-none mb-6 text-stone-900" id="hero-title">
-                        <span class="text-reveal-wrapper block"><span class="text-reveal-content delay-200">AURA</span></span>
-                        <span class="text-reveal-wrapper block"><span class="text-reveal-content delay-300 font-light tracking-tighter" style="-webkit-text-stroke: 1.5px #1C1C1C; color: transparent;">CREATIVE</span></span>
-                        <span class="text-reveal-wrapper block"><span class="text-reveal-content delay-400">DESIGN.</span></span>
+                    <h1 class="text-7xl md:text-[140px] font-bold tracking-tighter leading-[0.9] mb-8" id="hero-title">
+                        <span class="text-reveal-wrapper block"><span class="text-reveal-content text-obsidian delay-200">PURE</span></span>
+                        <span class="text-reveal-wrapper block"><span class="text-reveal-content text-transparent-stroke delay-300">AESTHETIC</span></span>
+                        <span class="text-reveal-wrapper block"><span class="text-reveal-content text-obsidian delay-400">CANVAS.</span></span>
                     </h1>
-                    <p class="text-base md:text-lg text-stone-600 max-w-md font-sans leading-relaxed mb-8 reveal delay-500">
-                        Combinação criativa de grids minimalistas, lettering transparente e micro-animações interativas. Focado na beleza de contrastes claros.
+                    
+                    <p class="text-lg md:text-xl text-muted font-sans leading-relaxed max-w-lg mb-10 reveal delay-500">
+                        Um ecossistema visual imaculado que combina fundos puramente brancos, tipografia vazada, e micro-interações requintadas para interfaces de alta fidelidade.
                     </p>
 
-                    <!-- Interactive Shimmer Button inside Hero -->
-                    <div class="flex flex-wrap items-center gap-4 reveal delay-700">
-                        <a id="btn-hero-explore" class="beam-button px-8 py-4 bg-stone-900 text-white font-mono text-xs uppercase tracking-widest hover:bg-stone-850 hover:shadow-lg transition-all duration-300 rounded-sm flex items-center gap-2 group" href="#typography">
-                            Explore Assets
-                            <iconify-icon class="text-base group-hover:translate-x-1 transition-transform" icon="solar:arrow-right-linear"></iconify-icon>
+                    <div class="flex flex-wrap items-center gap-5 reveal delay-700">
+                        <a href="#typography" class="beam-button px-8 py-4 bg-obsidian text-white font-mono text-[11px] uppercase tracking-widest hover:bg-charcoal hover:shadow-2xl hover:shadow-obsidian/20 transition-all rounded-sm flex items-center gap-3 group">
+                            Explore System
+                            <iconify-icon class="text-lg group-hover:translate-x-1 transition-transform" icon="solar:arrow-right-linear"></iconify-icon>
                         </a>
-                        <button id="btn-hero-modal" class="px-6 py-4 border border-stone-950 font-mono text-xs uppercase tracking-widest hover:bg-stone-950 hover:text-white transition-all duration-300 rounded-sm" onclick="toggleModal('demo-modal')">
-                            System Modal
+                        <button class="px-8 py-4 border border-borderLight text-obsidian font-mono text-[11px] uppercase tracking-widest hover:border-obsidian transition-all rounded-sm glass-panel group flex items-center gap-2">
+                            <iconify-icon class="text-lg group-hover:rotate-45 transition-transform" icon="solar:play-circle-linear"></iconify-icon>
+                            Play Reel
                         </button>
                     </div>
                 </div>
 
-                <!-- Footer elements inside hero -->
-                <div class="flex items-center justify-between text-xs font-mono text-stone-400 reveal delay-700">
-                    <span>GRID SCROLL OBSERVER ACTIVE</span>
-                    <span class="flex items-center gap-2">
-                        <span class="animate-bounce">
-                            <iconify-icon class="text-lg text-stone-900" icon="solar:arrow-down-linear"></iconify-icon>
-                        </span>
-                        SCROLL FOR FOUNDATIONS
-                    </span>
-                </div>
-            </div>
-
-            <!-- Right Interactive Stats Column (Col 3) -->
-            <div class="col-span-1 md:col-span-3 grid grid-rows-3 h-full divide-y divide-stone-300 relative z-10 bg-pure/35 backdrop-blur-sm">
-                <!-- Stat Card 1 -->
-                <div class="p-8 flex flex-col justify-between group hover:bg-pure transition-all duration-500 cursor-default reveal delay-200">
-                    <div class="flex items-center justify-between">
-                        <iconify-icon class="text-3xl text-stone-400 group-hover:text-accent transition-colors duration-500" icon="solar:layers-minimalistic-linear"></iconify-icon>
-                        <span class="text-[10px] font-mono text-stone-400">TOKENS</span>
-                    </div>
-                    <div>
-                        <h3 class="text-5xl font-bold tracking-tighter text-stone-900">18+</h3>
-                        <span class="text-xs font-mono text-stone-500 mt-1 block uppercase">Custom UI Elements</span>
-                    </div>
-                </div>
-
-                <!-- Stat Card 2 -->
-                <div class="p-8 flex flex-col justify-between group hover:bg-pure transition-all duration-500 cursor-default reveal delay-400 relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <iconify-icon class="text-3xl text-stone-400 group-hover:text-accent transition-colors duration-500" icon="solar:palette-linear"></iconify-icon>
-                        <span class="text-[10px] font-mono text-stone-400">COLORS</span>
-                    </div>
-                    <div>
-                        <h3 class="text-5xl font-bold tracking-tighter text-stone-900">08</h3>
-                        <span class="text-xs font-mono text-stone-500 mt-1 block uppercase">System Swatches</span>
-                    </div>
-                    <!-- Spin slow graphic on hover -->
-                    <div class="absolute -right-8 -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                        <iconify-icon class="text-stone-105 text-8xl animate-spin-slow" icon="solar:star-bold"></iconify-icon>
-                    </div>
-                </div>
-
-                <!-- Stat Card 3: Interactive Sound Toggle / Video controller -->
-                <div class="p-8 flex flex-col justify-between group hover:bg-pure transition-all duration-500 reveal delay-500 relative">
-                    <div class="flex items-center justify-between">
-                        <iconify-icon class="text-3xl text-stone-400 group-hover:text-accent transition-colors duration-500" icon="solar:playback-speed-linear"></iconify-icon>
-                        <span class="text-[10px] font-mono text-stone-400">INTERACTION</span>
-                    </div>
-                    <div class="space-y-4">
-                        <span class="text-[10px] font-mono text-accent uppercase tracking-widest block">CONTROL PANEL</span>
-                        <div class="flex items-center gap-3">
-                            <button id="ctrl-play" class="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-xs hover:border-stone-950 hover:bg-stone-900 hover:text-white transition-all" onclick="controlMedia('play')">
-                                <iconify-icon icon="solar:play-bold"></iconify-icon>
-                            </button>
-                            <button id="ctrl-pause" class="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-xs hover:border-stone-950 hover:bg-stone-900 hover:text-white transition-all" onclick="controlMedia('pause')">
-                                <iconify-icon icon="solar:pause-bold"></iconify-icon>
-                            </button>
-                            <span class="text-xs font-mono text-stone-600 ml-1">Video BG</span>
+                <!-- Right Interaction Display -->
+                <div class="col-span-1 md:col-span-4 h-full hidden md:flex flex-col justify-end pb-10">
+                    <div class="p-8 border border-borderLight bg-white/60 backdrop-blur-xl rounded-xl shadow-xl shadow-stone-200/50 reveal delay-500 relative overflow-hidden group">
+                        <!-- Card Hover Glare effect via CSS -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/80 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                        
+                        <div class="flex items-center justify-between mb-10">
+                            <iconify-icon class="text-4xl text-obsidian" icon="solar:atom-linear"></iconify-icon>
+                            <span class="text-[10px] font-mono text-muted uppercase">Interaction Spec</span>
                         </div>
+                        <h3 class="text-5xl font-semibold tracking-tighter text-obsidian mb-2">99.9%</h3>
+                        <p class="text-xs font-mono text-muted uppercase tracking-wider">Aesthetic Fidelity Target</p>
                     </div>
                 </div>
             </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 reveal delay-700">
+                <span class="text-[9px] font-mono text-muted uppercase tracking-widest">Scroll to explore</span>
+                <div class="w-px h-12 bg-borderLight relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-obsidian animate-[slideDown_2s_ease-in-out_infinite]"></div>
+                </div>
+            </div>
+            <style>
+                @keyframes slideDown {
+                    0% { transform: translateY(-100%); }
+                    100% { transform: translateY(200%); }
+                }
+            </style>
         </section>
 
-        <!-- Dynamic Marquee Loop 1 -->
-        <div class="border-b border-stone-300 overflow-hidden py-4 bg-pure/45 backdrop-blur-sm z-25 relative">
-            <div class="marquee-container select-none">
-                <div class="marquee-track">
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">System Foundations</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">Contrast Limit Ratio: AA/AAA Compliant</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">Motion Scale: cubic-bezier(0.16, 1, 0.3, 1)</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">Designed for Premium Web Products</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <!-- Duplicate for infinite scroll -->
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">System Foundations</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">Contrast Limit Ratio: AA/AAA Compliant</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">Motion Scale: cubic-bezier(0.16, 1, 0.3, 1)</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-700 mx-12">Designed for Premium Web Products</span>
-                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-stone-400 mx-12">•</span>
-                </div>
+        <!-- Infinite Marquee Section -->
+        <div class="border-b border-borderLight py-4 bg-white z-20 relative overflow-hidden">
+            <div class="marquee-track">
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">Pure White Design System</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">Fluid Micro-interactions</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">Transparent Lettering FX</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">AAA Contrast Compliant</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <!-- Repeat for infinite illusion -->
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">Pure White Design System</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">Fluid Micro-interactions</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">Transparent Lettering FX</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-obsidian mx-12">AAA Contrast Compliant</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-muted mx-12">•</span>
             </div>
         </div>
 
-        <!-- 1) TYPOGRAPHY SECTION -->
-        <section id="typography" class="relative z-10 border-b border-stone-300 bg-pure/10">
-            <div class="p-8 md:p-12 border-b border-stone-300 bg-pure/40">
-                <span class="text-xs font-mono uppercase text-accent tracking-widest block mb-2">01 / Foundation</span>
-                <h2 class="text-4xl font-bold tracking-tight text-stone-900">Typography System</h2>
+        <!-- =========================================
+             SECTION 1: TYPOGRAPHY
+             ========================================= -->
+        <section id="typography" class="relative z-10 border-b border-borderLight bg-white">
+            <div class="px-6 md:px-20 py-16 border-b border-borderLight bg-surface">
+                <span class="text-[10px] font-mono uppercase text-muted tracking-widest block mb-4">01 / Foundation</span>
+                <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-obsidian">Typography</h2>
             </div>
 
-            <!-- Fonts Strategy Details -->
-            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-stone-300 border-b border-stone-300">
-                <div class="p-8">
-                    <span class="text-[10px] font-mono text-stone-400 block mb-2">FONT FAMILY - SANS</span>
-                    <h3 class="text-2xl font-bold font-sans">Inter / Space Grotesk</h3>
-                    <p class="text-xs text-stone-500 font-mono mt-4 leading-relaxed">
-                        Strategy: Dynamic fallback layout. loaded via local CSS files. Primary text and buttons.
+            <!-- Font Families -->
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderLight border-b border-borderLight">
+                <div class="p-8 md:p-16 hover:bg-surface2 transition-colors duration-500">
+                    <span class="text-[10px] font-mono text-muted block mb-3 uppercase tracking-widest">Primary & Fallback Stack</span>
+                    <h3 class="text-3xl font-sans font-semibold mb-4">Inter / Space Grotesk</h3>
+                    <p class="text-sm text-muted leading-relaxed max-w-sm mb-6">
+                        Loaded via Google Fonts CDN. Empregado para leitura limpa, cabeçalhos, corpo de texto e interface de usuário. Fallback padrão de sans-serif.
                     </p>
-                </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-mono text-stone-400 block mb-2">FONT FAMILY - MONO</span>
-                    <h3 class="text-2xl font-bold font-mono text-stone-950">JetBrains Mono</h3>
-                    <p class="text-xs text-stone-500 font-mono mt-4 leading-relaxed">
-                        Strategy: loaded via Google Fonts CDN. Used for labels, statistics, codes, and numerical structures.
-                    </p>
-                </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-mono text-stone-400 block mb-2">WEIGHT RANGES</span>
-                    <div class="flex items-center gap-4 mt-2">
-                        <span class="text-sm font-light">300 (Light)</span>
-                        <span class="text-sm font-normal">400 (Regular)</span>
-                        <span class="text-sm font-medium">500 (Medium)</span>
-                        <span class="text-sm font-bold">700 (Bold)</span>
+                    <div class="flex gap-4">
+                        <span class="text-sm font-light">300</span>
+                        <span class="text-sm font-normal">400</span>
+                        <span class="text-sm font-medium">500</span>
+                        <span class="text-sm font-semibold">600</span>
+                        <span class="text-sm font-bold">700</span>
+                        <span class="text-sm font-extrabold">800</span>
                     </div>
-                    <p class="text-xs text-stone-500 font-mono mt-4">
-                        Weight options optimized for strict contrast compliance.
+                </div>
+                <div class="p-8 md:p-16 hover:bg-surface2 transition-colors duration-500">
+                    <span class="text-[10px] font-mono text-muted block mb-3 uppercase tracking-widest">Monospace Stack</span>
+                    <h3 class="text-3xl font-mono mb-4">JetBrains Mono</h3>
+                    <p class="text-sm text-muted leading-relaxed max-w-sm mb-6">
+                        Utilizado em pequenos rótulos, botões técnicos, numerais, estatísticas e metadados. Fornece uma textura de 'engenharia' contrastante com o branco limpo.
                     </p>
+                    <div class="flex gap-4">
+                        <span class="font-mono text-sm font-light">300</span>
+                        <span class="font-mono text-sm font-normal">400</span>
+                        <span class="font-mono text-sm font-medium">500</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Typography Hierarchy Scales -->
-            <div class="divide-y divide-stone-300">
-                <!-- Scale Row: H1 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline hover:bg-pure/50 transition-colors">
-                    <div class="col-span-3 text-xs font-mono text-stone-400 uppercase mb-4 md:mb-0">Display H1</div>
-                    <div class="col-span-7">
-                        <h1 class="text-6xl md:text-8xl font-semibold tracking-tighter leading-none text-stone-900">Aura System</h1>
+            <!-- Type Scale -->
+            <div class="divide-y divide-borderLight">
+                <!-- H1 Display -->
+                <div class="grid grid-cols-1 md:grid-cols-12 px-6 py-12 md:px-20 md:py-16 items-baseline group hover:bg-surface transition-colors duration-500">
+                    <div class="col-span-3 text-[10px] font-mono text-muted uppercase tracking-widest mb-4 md:mb-0 group-hover:text-obsidian transition-colors">Heading 1 / Display</div>
+                    <div class="col-span-6">
+                        <h1 class="text-6xl md:text-[96px] font-semibold tracking-tighter leading-none text-obsidian">Display H1</h1>
                     </div>
-                    <div class="col-span-2 text-left md:text-right text-xs font-mono text-stone-450 mt-2 md:mt-0">
+                    <div class="col-span-3 text-left md:text-right mt-4 md:mt-0 text-xs font-mono text-muted space-y-1">
+                        <div>Font: Inter</div>
+                        <div>Weight: 600 (Semibold)</div>
                         <div>Size: 6rem / 96px</div>
-                        <div>Weight: 700 / Bold</div>
-                        <div>Leading: None / 1</div>
+                        <div>Line-Height: 1 (None)</div>
+                        <div>Tracking: -0.05em</div>
                     </div>
                 </div>
 
-                <!-- Scale Row: H2 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline hover:bg-pure/50 transition-colors">
-                    <div class="col-span-3 text-xs font-mono text-stone-400 uppercase mb-4 md:mb-0">Heading H2</div>
-                    <div class="col-span-7">
-                        <h2 class="text-5xl font-medium tracking-tighter text-stone-900">Visual Principles</h2>
+                <!-- H2 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 px-6 py-12 md:px-20 md:py-16 items-baseline group hover:bg-surface transition-colors duration-500">
+                    <div class="col-span-3 text-[10px] font-mono text-muted uppercase tracking-widest mb-4 md:mb-0 group-hover:text-obsidian transition-colors">Heading 2 / Section</div>
+                    <div class="col-span-6">
+                        <h2 class="text-4xl md:text-[60px] font-medium tracking-tighter leading-tight text-obsidian">Section Title</h2>
                     </div>
-                    <div class="col-span-2 text-left md:text-right text-xs font-mono text-stone-450 mt-2 md:mt-0">
-                        <div>Size: 3rem / 48px</div>
-                        <div>Weight: 500 / Medium</div>
-                        <div>Leading: Tight</div>
-                    </div>
-                </div>
-
-                <!-- Scale Row: H3 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline hover:bg-pure/50 transition-colors">
-                    <div class="col-span-3 text-xs font-mono text-stone-400 uppercase mb-4 md:mb-0">Heading H3</div>
-                    <div class="col-span-7">
-                        <h3 class="text-4xl font-medium tracking-tight text-stone-900">Interaction Guidelines</h3>
-                    </div>
-                    <div class="col-span-2 text-left md:text-right text-xs font-mono text-stone-450 mt-2 md:mt-0">
-                        <div>Size: 2.25rem / 36px</div>
-                        <div>Weight: 500 / Medium</div>
-                        <div>Leading: Tight</div>
+                    <div class="col-span-3 text-left md:text-right mt-4 md:mt-0 text-xs font-mono text-muted space-y-1">
+                        <div>Font: Inter</div>
+                        <div>Weight: 500 (Medium)</div>
+                        <div>Size: 3.75rem / 60px</div>
+                        <div>Line-Height: 1.1 (Tight)</div>
+                        <div>Tracking: -0.05em</div>
                     </div>
                 </div>
 
-                <!-- Scale Row: Body Large -->
-                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline hover:bg-pure/50 transition-colors">
-                    <div class="col-span-3 text-xs font-mono text-stone-400 uppercase mb-4 md:mb-0">Body Large</div>
-                    <div class="col-span-7">
-                        <p class="text-lg leading-relaxed text-stone-850">
-                            Aura brings focus back to structure and alignment. By mixing stark light layouts with clean modern typefaces, interface elements are placed under clear hierarchy.
+                <!-- Body Large -->
+                <div class="grid grid-cols-1 md:grid-cols-12 px-6 py-12 md:px-20 md:py-16 items-baseline group hover:bg-surface transition-colors duration-500">
+                    <div class="col-span-3 text-[10px] font-mono text-muted uppercase tracking-widest mb-4 md:mb-0 group-hover:text-obsidian transition-colors">Body Large / Intro</div>
+                    <div class="col-span-6">
+                        <p class="text-xl leading-relaxed text-charcoal">
+                            Um parágrafo de introdução utilizado logo abaixo de cabeçalhos grandes. Possui line-height relaxado para garantir respirabilidade num fundo totalmente branco.
                         </p>
                     </div>
-                    <div class="col-span-2 text-left md:text-right text-xs font-mono text-stone-450 mt-2 md:mt-0">
-                        <div>Size: 1.125rem / 18px</div>
-                        <div>Weight: 400 / Regular</div>
-                        <div>Leading: 1.625</div>
+                    <div class="col-span-3 text-left md:text-right mt-4 md:mt-0 text-xs font-mono text-muted space-y-1">
+                        <div>Font: Inter</div>
+                        <div>Weight: 400 (Regular)</div>
+                        <div>Size: 1.25rem / 20px</div>
+                        <div>Line-Height: 1.625 (Relaxed)</div>
                     </div>
                 </div>
 
-                <!-- Scale Row: Body Base -->
-                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline hover:bg-pure/50 transition-colors">
-                    <div class="col-span-3 text-xs font-mono text-stone-400 uppercase mb-4 md:mb-0">Body Base</div>
-                    <div class="col-span-7">
-                        <p class="text-sm md:text-base leading-relaxed text-stone-700">
-                            The standard body component utilized in articles, lists, descriptions, and system documentation. It remains highly legible on both light pure background and canvas.
+                <!-- Body Base -->
+                <div class="grid grid-cols-1 md:grid-cols-12 px-6 py-12 md:px-20 md:py-16 items-baseline group hover:bg-surface transition-colors duration-500">
+                    <div class="col-span-3 text-[10px] font-mono text-muted uppercase tracking-widest mb-4 md:mb-0 group-hover:text-obsidian transition-colors">Body Base / Paragraph</div>
+                    <div class="col-span-6">
+                        <p class="text-base leading-normal text-muted">
+                            Corpo de texto padrão para artigos longos, descrições secundárias e elementos onde o contraste deve ser sutil mas mantendo certificação AA.
                         </p>
                     </div>
-                    <div class="col-span-2 text-left md:text-right text-xs font-mono text-stone-450 mt-2 md:mt-0">
+                    <div class="col-span-3 text-left md:text-right mt-4 md:mt-0 text-xs font-mono text-muted space-y-1">
+                        <div>Font: Inter</div>
+                        <div>Weight: 400 (Regular)</div>
                         <div>Size: 1rem / 16px</div>
-                        <div>Weight: 400 / Regular</div>
-                        <div>Leading: Normal</div>
+                        <div>Line-Height: 1.5 (Normal)</div>
                     </div>
                 </div>
 
-                <!-- Scale Row: Labels / Mono -->
-                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline hover:bg-pure/50 transition-colors">
-                    <div class="col-span-3 text-xs font-mono text-stone-400 uppercase mb-4 md:mb-0">Label / Monospace</div>
-                    <div class="col-span-7">
-                        <span class="text-xs font-mono uppercase tracking-[0.25em] text-stone-800">SYSTEM STENCIL LABELS</span>
+                <!-- Caption / Label -->
+                <div class="grid grid-cols-1 md:grid-cols-12 px-6 py-12 md:px-20 md:py-16 items-baseline group hover:bg-surface transition-colors duration-500">
+                    <div class="col-span-3 text-[10px] font-mono text-muted uppercase tracking-widest mb-4 md:mb-0 group-hover:text-obsidian transition-colors">Caption / Label Mono</div>
+                    <div class="col-span-6">
+                        <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-obsidian">SYSTEM_METADATA_LABEL</span>
                     </div>
-                    <div class="col-span-2 text-left md:text-right text-xs font-mono text-stone-450 mt-2 md:mt-0">
-                        <div>Size: 0.75rem / 12px</div>
-                        <div>Weight: 500 / Mono</div>
-                        <div>Spacing: 0.25em</div>
+                    <div class="col-span-3 text-left md:text-right mt-4 md:mt-0 text-xs font-mono text-muted space-y-1">
+                        <div>Font: JetBrains Mono</div>
+                        <div>Weight: 500 (Medium)</div>
+                        <div>Size: 0.6875rem / 11px</div>
+                        <div>Tracking: 0.2em (Widest)</div>
+                        <div>Text-Transform: Uppercase</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             SECTION 2: COLOR SYSTEM
+             ========================================= -->
+        <section id="colors" class="relative z-10 border-b border-borderLight bg-white">
+            <div class="px-6 md:px-20 py-16 border-b border-borderLight bg-surface">
+                <span class="text-[10px] font-mono uppercase text-muted tracking-widest block mb-4">02 / Foundation</span>
+                <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-obsidian">Color System</h2>
+            </div>
+
+            <!-- Color Swatches Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 md:divide-x divide-borderLight border-b border-borderLight">
+                
+                <!-- Swatch 1: Base White -->
+                <div class="p-8 aspect-square bg-[#FFFFFF] border border-borderLight m-6 shadow-sm flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[9px] font-mono text-muted uppercase">Semantic Role</span>
+                        <h4 class="text-sm font-bold text-obsidian mt-1">Background Base</h4>
+                    </div>
+                    <div>
+                        <h5 class="text-3xl font-semibold tracking-tight text-obsidian mb-2">Pure White</h5>
+                        <ul class="text-[10px] font-mono text-muted space-y-1">
+                            <li>HEX: #FFFFFF</li>
+                            <li>RGB: 255, 255, 255</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Swatch 2: Obsidian -->
+                <div class="p-8 aspect-square bg-[#09090B] text-white m-6 flex flex-col justify-between group shadow-xl">
+                    <div>
+                        <span class="text-[9px] font-mono text-stone-400 uppercase">Semantic Role</span>
+                        <h4 class="text-sm font-bold text-white mt-1">Primary Text & Elements</h4>
+                    </div>
+                    <div>
+                        <h5 class="text-3xl font-semibold tracking-tight text-white mb-2">Obsidian</h5>
+                        <ul class="text-[10px] font-mono text-stone-400 space-y-1">
+                            <li>HEX: #09090B</li>
+                            <li>RGB: 9, 9, 11</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Swatch 3: Surface Gray -->
+                <div class="p-8 aspect-square bg-[#FAFAFA] m-6 border border-borderLight flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[9px] font-mono text-muted uppercase">Semantic Role</span>
+                        <h4 class="text-sm font-bold text-obsidian mt-1">Surface Hover / Offset</h4>
+                    </div>
+                    <div>
+                        <h5 class="text-3xl font-semibold tracking-tight text-obsidian mb-2">Surface Light</h5>
+                        <ul class="text-[10px] font-mono text-muted space-y-1">
+                            <li>HEX: #FAFAFA</li>
+                            <li>RGB: 250, 250, 250</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Swatch 4: Muted -->
+                <div class="p-8 aspect-square bg-[#71717A] text-white m-6 flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[9px] font-mono text-stone-300 uppercase">Semantic Role</span>
+                        <h4 class="text-sm font-bold text-white mt-1">Helper Text / Borders Active</h4>
+                    </div>
+                    <div>
+                        <h5 class="text-3xl font-semibold tracking-tight text-white mb-2">Muted Zinc</h5>
+                        <ul class="text-[10px] font-mono text-stone-300 space-y-1">
+                            <li>HEX: #71717A</li>
+                            <li>RGB: 113, 113, 122</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contextual Rules -->
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderLight">
+                <div class="p-10 md:p-16">
+                    <h4 class="text-lg font-semibold mb-6">Contextual Usage & Opacity</h4>
+                    <ul class="space-y-4">
+                        <li class="flex flex-col gap-1">
+                            <span class="text-[11px] font-mono uppercase text-muted">Borders (rgba)</span>
+                            <span class="text-sm">Bordas padrão usam Obsidian com 8% de opacidade `rgba(9,9,11,0.08)` para fundir com o fundo branco perfeitamente.</span>
+                        </li>
+                        <li class="flex flex-col gap-1">
+                            <span class="text-[11px] font-mono uppercase text-muted">Glassmorphism</span>
+                            <span class="text-sm">Painéis sobrepostos usam Base White com 70% de opacidade combinados com um backdrop-blur forte de `24px`.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-10 md:p-16">
+                    <h4 class="text-lg font-semibold mb-6">Contrast Intent</h4>
+                    <div class="p-6 border border-borderLight rounded-lg bg-surface">
+                        <div class="flex items-center justify-between border-b border-borderLight pb-3 mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-[#09090B]"></div>
+                                <span class="text-sm">Obsidian on White</span>
+                            </div>
+                            <span class="text-xs font-mono bg-green-100 text-green-800 px-2 py-0.5 rounded">AAA PASS (20.5:1)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-[#71717A]"></div>
+                                <span class="text-sm">Muted on White</span>
+                            </div>
+                            <span class="text-xs font-mono bg-green-100 text-green-800 px-2 py-0.5 rounded">AA PASS (4.5:1)</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2) COLOR SYSTEM SECTION -->
-        <section id="colors" class="relative z-10 border-b border-stone-300 bg-[#EAEAE5]">
-            <div class="p-8 md:p-12 border-b border-stone-300 bg-pure/40">
-                <span class="text-xs font-mono uppercase text-accent tracking-widest block mb-2">02 / Foundation</span>
-                <h2 class="text-4xl font-bold tracking-tight text-stone-900">Color System</h2>
+        <!-- =========================================
+             SECTION 3: UI COMPONENTS & ANIMATIONS
+             ========================================= -->
+        <section id="components" class="relative z-10 border-b border-borderLight bg-white">
+            <div class="px-6 md:px-20 py-16 border-b border-borderLight bg-surface">
+                <span class="text-[10px] font-mono uppercase text-muted tracking-widest block mb-4">03 / Interface</span>
+                <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-obsidian">Components Spec</h2>
             </div>
 
-            <!-- Color Palette Swatches -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-stone-300 md:border-b border-stone-300">
-                <!-- Color 1: Canvas Bg -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-[#EAEAE5] group cursor-pointer" onclick="copyColor('#EAEAE5')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-stone-400 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-stone-900">Canvas background</span>
-                        </div>
-                        <iconify-icon class="text-stone-300 group-hover:text-stone-900 transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
+            <!-- Components Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderLight border-b border-borderLight">
+                
+                <!-- Col 1: Buttons & Inputs -->
+                <div class="p-8 md:p-16 space-y-16">
+                    
+                    <!-- Buttons -->
                     <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Canvas</h4>
-                        <span class="font-mono text-xs block text-stone-600">HEX: #EAEAE5</span>
-                        <span class="font-mono text-[10px] block text-stone-500">HSL: 60°, 7%, 90%</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-stone-900/10 text-[9px] font-mono rounded bg-pure/50 text-stone-700">Contrast AAA Target</span>
-                    </div>
-                </div>
-
-                <!-- Color 2: Pure White -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-white border-r border-stone-300/40 group cursor-pointer" onclick="copyColor('#FFFFFF')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-stone-400 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-stone-900">Canvas Surface</span>
-                        </div>
-                        <iconify-icon class="text-stone-300 group-hover:text-stone-900 transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Pure Canvas</h4>
-                        <span class="font-mono text-xs block text-stone-600">HEX: #FFFFFF</span>
-                        <span class="font-mono text-[10px] block text-stone-500">RGB: 255, 255, 255</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-stone-900/10 text-[9px] font-mono rounded bg-canvas/30 text-stone-700 font-bold">Contrast AAA Target</span>
-                    </div>
-                </div>
-
-                <!-- Color 3: Charcoal Dark -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-[#1C1C1C] text-white group cursor-pointer" onclick="copyColor('#1C1C1C')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-stone-500 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-stone-200">Text Primary</span>
-                        </div>
-                        <iconify-icon class="text-stone-500 group-hover:text-white transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Charcoal</h4>
-                        <span class="font-mono text-xs block text-stone-300">HEX: #1C1C1C</span>
-                        <span class="font-mono text-[10px] block text-stone-400">HSL: 0°, 0%, 11%</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-white/10 text-[9px] font-mono rounded bg-white/10 text-stone-350">Contrast AAA Target</span>
-                    </div>
-                </div>
-
-                <!-- Color 4: Coral Accent -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-[#FF3300] text-white group cursor-pointer" onclick="copyColor('#FF3300')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-red-200 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-white">Accent / Hot Action</span>
-                        </div>
-                        <iconify-icon class="text-red-200 group-hover:text-white transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Aura Coral</h4>
-                        <span class="font-mono text-xs block text-white/90">HEX: #FF3300</span>
-                        <span class="font-mono text-[10px] block text-red-100">RGB: 255, 51, 0</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-white/20 text-[9px] font-mono rounded bg-black/15 text-white">Contrast AA Target</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dynamic Color Swatches Row 2 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-stone-300 border-t border-stone-300">
-                <!-- Color 5: Muted Gray -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-[#6B6B6B] text-white group cursor-pointer" onclick="copyColor('#6B6B6B')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-stone-300 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-stone-200">Text Muted</span>
-                        </div>
-                        <iconify-icon class="text-stone-300 group-hover:text-white transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Muted</h4>
-                        <span class="font-mono text-xs block text-stone-200">HEX: #6B6B6B</span>
-                        <span class="font-mono text-[10px] block text-stone-300">HSL: 0°, 0%, 42%</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-white/10 text-[9px] font-mono rounded bg-white/5 text-stone-300">Helper text only</span>
-                    </div>
-                </div>
-
-                <!-- Color 6: Acid Accent -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-[#CCFF00] text-stone-900 group cursor-pointer" onclick="copyColor('#CCFF00')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-lime-800 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-lime-900">Accent / Micro-Glow</span>
-                        </div>
-                        <iconify-icon class="text-lime-800 group-hover:text-stone-900 transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Acid Lime</h4>
-                        <span class="font-mono text-xs block text-stone-850">HEX: #CCFF00</span>
-                        <span class="font-mono text-[10px] block text-stone-700">RGB: 204, 255, 0</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-black/10 text-[9px] font-mono rounded bg-black/5 text-stone-800">Decorative Elements</span>
-                    </div>
-                </div>
-
-                <!-- Color 7: Deep Obsidian -->
-                <div class="p-8 flex flex-col justify-between aspect-square bg-[#09090B] text-white group cursor-pointer" onclick="copyColor('#09090B')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-stone-400 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-stone-200">High Contrast Area</span>
-                        </div>
-                        <iconify-icon class="text-stone-500 group-hover:text-white transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Obsidian</h4>
-                        <span class="font-mono text-xs block text-stone-300">HEX: #09090B</span>
-                        <span class="font-mono text-[10px] block text-stone-400">HSL: 240°, 10%, 4%</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-white/10 text-[9px] font-mono rounded bg-white/10 text-stone-300">AA Large Target</span>
-                    </div>
-                </div>
-
-                <!-- Color 8: Translucent Glass Surface -->
-                <div class="p-8 flex flex-col justify-between aspect-square glass-panel group cursor-pointer" onclick="copyColor('rgba(255,255,255,0.45)')">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono text-stone-400 block">SEMANTIC ROLE</span>
-                            <span class="text-xs font-mono font-bold text-stone-800">Interactive Glass</span>
-                        </div>
-                        <iconify-icon class="text-stone-400 group-hover:text-stone-900 transition-colors" icon="solar:copy-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold tracking-tight mb-1">Aura Glass</h4>
-                        <span class="font-mono text-xs block text-stone-700">RGBA(255,255,255,0.45)</span>
-                        <span class="font-mono text-[10px] block text-stone-500">Backdrop-Filter: 16px</span>
-                        <span class="inline-block mt-3 px-2 py-0.5 border border-stone-950/10 text-[9px] font-mono rounded bg-pure/70 text-stone-700 font-medium">Visual Overlay spec</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Palette rules / guidelines -->
-            <div class="p-8 md:p-12 bg-pure/45 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-mono leading-relaxed text-stone-600 border-t border-stone-300">
-                <div>
-                    <h5 class="text-stone-950 font-bold uppercase mb-3">Contextual Usage Rules</h5>
-                    <ul class="space-y-2 list-disc list-inside">
-                        <li>Text main must always target `#1C1C1C` on `#FFFFFF` and `#EAEAE5` to preserve full AAA contrast rating.</li>
-                        <li>Interactive accent signals (clicks, tabs) must leverage `#FF3300` for primary actions.</li>
-                        <li>Hover feedback states must execute using scale shifts and glow offsets instead of changing background opacity.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-stone-950 font-bold uppercase mb-3">AA / AAA Contrast Target Map</h5>
-                    <ul class="space-y-2 list-disc list-inside">
-                        <li>Canvas bg (#EAEAE5) to Charcoal Text (#1C1C1C) -> Ratio: ~12.2:1 (Passed AAA)</li>
-                        <li>Canvas bg (#EAEAE5) to Pure Swatch (#FFFFFF) -> Ratio: ~1.2:1 (Decorative Only)</li>
-                        <li>Aura Coral bg (#FF3300) to white text -> Ratio: ~3.8:1 (Passed AA Large)</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3) UI COMPONENTS SECTION -->
-        <section id="components" class="relative z-10 border-b border-stone-300 bg-pure/10">
-            <div class="p-8 md:p-12 border-b border-stone-300 bg-pure/40">
-                <span class="text-xs font-mono uppercase text-accent tracking-widest block mb-2">03 / UI Elements</span>
-                <h2 class="text-4xl font-bold tracking-tight text-stone-900">UI Components Showcase</h2>
-            </div>
-
-            <!-- Components Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-300 border-b border-stone-300">
-                <!-- Part 1: Buttons and Modals -->
-                <div class="p-8 md:p-12 space-y-12">
-                    <div>
-                        <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // ACTIONS & BUTTONS</span>
-                        <h4 class="text-lg font-bold text-stone-900 mb-8 uppercase tracking-wider border-b border-stone-300 pb-2">Buttons Specs</h4>
-
-                        <div class="space-y-8">
-                            <!-- Button A: Primary Solid -->
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border border-stone-300/40 bg-pure/40 rounded-sm">
-                                <div>
-                                    <span class="text-xs font-bold text-stone-900 block">Primary Action</span>
-                                    <span class="text-[10px] font-mono text-stone-400">Class: solid black flex-center transition</span>
-                                </div>
-                                <button id="btn-primary-spec" class="px-5 py-3 bg-stone-900 text-white font-mono text-xs uppercase tracking-wider rounded-sm hover:bg-stone-750 transition-all flex items-center gap-2 group">
-                                    Continue
-                                    <iconify-icon class="text-base group-hover:translate-x-1 transition-transform" icon="solar:arrow-right-linear"></iconify-icon>
+                        <h3 class="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">Buttons & Actions</h3>
+                        <div class="space-y-6">
+                            <!-- Primary Beam Button -->
+                            <div class="flex items-center justify-between border border-borderLight p-6 rounded-lg group hover:bg-surface transition-colors">
+                                <button class="beam-button px-6 py-3 bg-obsidian text-white font-mono text-[11px] uppercase tracking-widest rounded-sm flex items-center gap-2 hover:bg-charcoal transition-colors shadow-lg shadow-stone-200">
+                                    Primary Beam
+                                    <iconify-icon class="text-lg" icon="solar:bolt-linear"></iconify-icon>
                                 </button>
+                                <span class="text-[10px] font-mono text-muted text-right">Solid + Shimmer FX</span>
                             </div>
 
-                            <!-- Button B: Outline / Pill -->
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border border-stone-300/40 bg-pure/40 rounded-sm">
-                                <div>
-                                    <span class="text-xs font-bold text-stone-900 block">Secondary Outline</span>
-                                    <span class="text-[10px] font-mono text-stone-400">Class: border-stone px-8 py-3 rounded-full hover</span>
-                                </div>
-                                <button id="btn-outline-spec" class="px-6 py-2.5 border border-stone-950 font-mono text-xs uppercase tracking-wider rounded-full hover:bg-stone-950 hover:text-white transition-all duration-350">
-                                    Configure
+                            <!-- Outline / Pill -->
+                            <div class="flex items-center justify-between border border-borderLight p-6 rounded-lg group hover:bg-surface transition-colors">
+                                <button class="px-6 py-3 border border-obsidian text-obsidian font-mono text-[11px] uppercase tracking-widest rounded-full flex items-center gap-2 hover:bg-obsidian hover:text-white transition-all duration-300">
+                                    Secondary Pill
+                                    <iconify-icon class="text-lg" icon="solar:round-alt-arrow-right-linear"></iconify-icon>
                                 </button>
-                            </div>
-
-                            <!-- Button C: Beam / Shimmer Button -->
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border border-stone-300/40 bg-pure/40 rounded-sm">
-                                <div>
-                                    <span class="text-xs font-bold text-stone-900 block">Beam Shimmer Button</span>
-                                    <span class="text-[10px] font-mono text-stone-400">Class: beam-button bg-stone text-white</span>
-                                </div>
-                                <button id="btn-beam-spec" class="beam-button px-6 py-3 bg-stone-900 text-white font-mono text-xs uppercase tracking-wider rounded-sm flex items-center gap-2">
-                                    <iconify-icon icon="solar:star-linear" class="text-base animate-pulse"></iconify-icon>
-                                    Premium Action
-                                </button>
-                            </div>
-
-                            <!-- Button D: Text Link -->
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border border-stone-300/40 bg-pure/40 rounded-sm">
-                                <div>
-                                    <span class="text-xs font-bold text-stone-900 block">Minimal Text Link</span>
-                                    <span class="text-[10px] font-mono text-stone-400">Class: text-stone border-b transition-colors</span>
-                                </div>
-                                <a id="link-text-spec" class="text-xs font-mono font-bold text-stone-900 uppercase border-b border-stone-950 hover:text-accent hover:border-accent transition-colors pb-0.5" href="#">
-                                    View Repository
-                                </a>
+                                <span class="text-[10px] font-mono text-muted text-right">Border Grow Hover</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Modal demonstration triggers -->
+                    <!-- Inputs -->
                     <div>
-                        <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // OVERLAY INTERACTION</span>
-                        <h4 class="text-lg font-bold text-stone-900 mb-8 uppercase tracking-wider border-b border-stone-300 pb-2">System Modal</h4>
+                        <h3 class="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">Forms & Inputs</h3>
+                        <div class="p-8 border border-borderLight rounded-lg bg-surface relative">
+                            <div class="input-grow-wrapper mb-6">
+                                <label class="text-[10px] font-mono uppercase text-muted block mb-2">Email Address</label>
+                                <input type="email" placeholder="Enter your email" class="w-full bg-transparent border-b border-borderLight pb-3 outline-none text-obsidian placeholder-stone-300 transition-all focus:placeholder-stone-200">
+                            </div>
+                            <div class="input-grow-wrapper">
+                                <label class="text-[10px] font-mono uppercase text-muted block mb-2">Access Code</label>
+                                <input type="password" placeholder="••••••••" class="w-full bg-transparent border-b border-borderLight pb-3 outline-none text-obsidian placeholder-stone-300 transition-all">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="p-6 border border-stone-300/40 bg-pure/40 rounded-sm space-y-4">
-                            <p class="text-xs text-stone-600 leading-relaxed">
-                                Modal overlays trigger dynamically using standard custom state attributes, maintaining backdrop accessibility blur rules.
-                            </p>
-                            <button id="btn-modal-trigger-1" class="px-5 py-3 bg-stone-950 text-white font-mono text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors w-full" onclick="toggleModal('demo-modal')">
-                                Launch Interactive Modal
+                <!-- Col 2: Cards & Modals -->
+                <div class="p-8 md:p-16 space-y-16">
+                    
+                    <!-- Cards -->
+                    <div>
+                        <h3 class="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">Interactive Cards</h3>
+                        <div class="group border border-borderLight rounded-xl p-8 hover:-translate-y-2 hover:shadow-2xl hover:shadow-stone-200/50 transition-all duration-500 cursor-pointer bg-white relative overflow-hidden">
+                            <!-- Glare -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 z-10 pointer-events-none"></div>
+                            
+                            <div class="flex justify-between items-start mb-10">
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-obsidian px-2 py-1 bg-surface rounded">Project 01</span>
+                                <iconify-icon class="text-2xl text-muted group-hover:text-obsidian group-hover:rotate-45 transition-all duration-300" icon="solar:arrow-right-up-linear"></iconify-icon>
+                            </div>
+                            <h4 class="text-3xl font-semibold tracking-tighter text-obsidian mb-3">Aesthetic Card Lift</h4>
+                            <p class="text-sm text-muted">Demonstrates elegant hover levitation combined with CSS glare effects over a pure white layout.</p>
+                        </div>
+                    </div>
+
+                    <!-- Modals & Badges -->
+                    <div>
+                        <h3 class="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">Modals & Overlays</h3>
+                        <div class="p-10 border border-borderLight rounded-lg bg-surface flex flex-col items-center justify-center relative overflow-hidden">
+                            <!-- Background animation for visual context -->
+                            <div class="absolute w-full h-full inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.02)_0,transparent_50%)]"></div>
+                            
+                            <button onclick="toggleDemoModal()" class="relative z-10 px-6 py-3 bg-white border border-borderLight text-obsidian font-mono text-[11px] uppercase tracking-widest rounded shadow-sm hover:shadow-md transition-all">
+                                Trigger Glass Modal
                             </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Part 2: Inputs and Interactive Cards -->
-                <div class="p-8 md:p-12 space-y-12">
-                    <!-- Inputs and SVG Controls -->
-                    <div>
-                        <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // INPUTS & CONTROLS</span>
-                        <h4 class="text-lg font-bold text-stone-900 mb-8 uppercase tracking-wider border-b border-stone-300 pb-2">Form Controls Specs</h4>
+        <!-- =========================================
+             SECTION 4: ICONS & GLOW FX
+             ========================================= -->
+        <section class="relative z-10 border-b border-borderLight bg-white py-20 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-stone-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
 
-                        <div class="space-y-6">
-                            <!-- Text Input field with bottom border focus grow -->
-                            <div class="space-y-2">
-                                <label class="text-[10px] font-mono text-stone-500 uppercase block" for="input-demo-field">Text Field input</label>
-                                <div class="border-grow-input">
-                                    <input id="input-demo-field" class="w-full bg-pure/50 px-4 py-3 border border-stone-300 focus:outline-none focus:bg-white text-sm font-sans transition-all" type="text" placeholder="Insira dados de configuração..." />
-                                </div>
-                                <span class="text-[9px] font-mono text-stone-400">Visual indicator: Border grows from the center on focus.</span>
-                            </div>
-
-                            <!-- Custom Checked Drawer -->
-                            <div class="flex items-center justify-between p-4 border border-stone-300/40 bg-pure/40 rounded-sm">
-                                <div>
-                                    <span class="text-xs font-bold text-stone-900 block">Custom Checkbox SVG Draw</span>
-                                    <span class="text-[10px] font-mono text-stone-400">Class: checkbox-draw SVG stroke animations</span>
-                                </div>
-                                <label class="relative flex items-center justify-center cursor-pointer select-none">
-                                    <input id="check-draw-control" type="checkbox" class="sr-only peer" />
-                                    <!-- custom checkbox box -->
-                                    <div class="w-6 h-6 border border-stone-400 bg-pure rounded-sm flex items-center justify-center peer-checked:bg-stone-900 peer-checked:border-stone-900 checkbox-box transition-all duration-350 checkbox-draw">
-                                        <svg class="w-4 h-4 text-white stroke-current fill-none" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M20 6L9 17L4 12"></path>
-                                        </svg>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Flashlight Cursor Card & Glow Spec -->
-                    <div>
-                        <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // MICRO-EFFECT CARDS</span>
-                        <h4 class="text-lg font-bold text-stone-900 mb-8 uppercase tracking-wider border-b border-stone-300 pb-2">Surface Effects</h4>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- Flashlight hover card -->
-                            <div id="card-flashlight-demo" class="flashlight-card p-6 rounded-sm min-h-[160px] flex flex-col justify-between group transition-all duration-300 cursor-pointer">
-                                <div class="flex justify-between items-start">
-                                    <span class="text-[9px] font-mono text-stone-400 block">CURSOR GLOW</span>
-                                    <iconify-icon class="text-stone-300 text-xl" icon="solar:record-linear"></iconify-icon>
-                                </div>
-                                <div>
-                                    <h5 class="text-sm font-bold text-stone-900 mb-1">Flashlight Card</h5>
-                                    <p class="text-[10px] text-stone-500 leading-relaxed">Passe o mouse por aqui para ver o gradiente radial seguir as coordenadas do ponteiro.</p>
-                                </div>
-                            </div>
-
-                            <!-- Glow effect box -->
-                            <div id="card-glow-demo" class="p-6 bg-pure border border-stone-300/80 rounded-sm min-h-[160px] flex flex-col justify-between group hover:shadow-2xl hover:shadow-stone-400/35 hover:-translate-y-1 transition-all duration-500 cursor-pointer">
-                                <div class="flex justify-between items-start">
-                                    <span class="text-[9px] font-mono text-stone-400 block">GLOW ON HOVER</span>
-                                    <iconify-icon class="text-stone-300 text-xl" icon="solar:sun-fog-linear"></iconify-icon>
-                                </div>
-                                <div>
-                                    <h5 class="text-sm font-bold text-stone-900 mb-1">Hover Glow Box</h5>
-                                    <p class="text-[10px] text-stone-500 leading-relaxed">Utiliza suavização de sombras complexas no estado hover, criando elevação visual.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="px-6 md:px-20 text-center mb-16 relative z-10">
+                <span class="text-[10px] font-mono uppercase text-muted tracking-widest block mb-4">04 / Iconography</span>
+                <h2 class="text-4xl font-semibold tracking-tighter text-obsidian">Solar Icon Library</h2>
             </div>
 
-            <!-- Project Card spec container (Width 100% border top) -->
-            <div class="border-t border-stone-300 p-8 md:p-12">
-                <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // COMPOSITE PROJECT CARD</span>
-                <h4 class="text-lg font-bold text-stone-900 mb-8 uppercase tracking-wider">Composite Project Card Specification</h4>
-
-                <!-- Base Project Card Instance -->
-                <div id="project-card-instance" class="group border border-stone-300 bg-pure/30 hover:bg-white transition-colors duration-700 cursor-pointer overflow-hidden max-w-4xl">
-                    <div class="grid grid-cols-1 md:grid-cols-12 min-h-[280px]">
-                        <!-- Text Area -->
-                        <div class="col-span-1 md:col-span-5 p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-stone-300">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs font-mono text-stone-400">CASE // 01</span>
-                                <div class="h-px w-8 bg-stone-300"></div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-accent font-mono">UI Architecture</span>
-                            </div>
-                            <div class="my-6">
-                                <h4 class="text-2xl font-bold tracking-tight text-stone-900 mb-2 group-hover:translate-x-2 transition-transform duration-500">Digital Architect</h4>
-                                <p class="text-stone-500 text-xs leading-relaxed">
-                                    Implementação de layout limpo, com grids verticais aparentes e tipografia de alto impacto visual.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-2 text-xs font-mono font-bold text-stone-850">
-                                <span>VER DETALHES</span>
-                                <iconify-icon class="group-hover:translate-x-1 transition-transform" icon="solar:arrow-right-linear"></iconify-icon>
-                            </div>
-                        </div>
-                        <!-- Visual/Image Area with Zoom on Hover -->
-                        <div class="col-span-1 md:col-span-7 relative overflow-hidden bg-stone-250 flex items-center justify-center p-8">
-                            <img class="absolute inset-0 w-full h-full object-cover grayscale contrast-115 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 opacity-90" src="Pen_writing_in_notebook_202607091112.jpeg" alt="Architecture Notebook" />
-                            <div class="absolute inset-0 bg-stone-900/10 pointer-events-none"></div>
-                            <!-- Small badge floating inside image -->
-                            <div class="absolute bottom-4 right-4 bg-pure/90 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-stone-900 border border-stone-200">
-                                2026 RELEASE
-                            </div>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 px-6 md:px-20 max-w-5xl mx-auto relative z-10">
+                <!-- Icon Items -->
+                <div class="flex flex-col items-center gap-3 p-6 group cursor-pointer reveal delay-100 hover:bg-surface rounded-xl transition-colors">
+                    <iconify-icon class="text-3xl text-obsidian group-hover:-translate-y-1 transition-transform" icon="solar:layers-minimalistic-linear"></iconify-icon>
+                    <span class="text-[9px] font-mono text-muted">layers</span>
                 </div>
-            </div>
-
-            <!-- Modals, Badges and Tooltips Specs Row -->
-            <div class="border-t border-stone-300 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-300 bg-pure/15">
-                <!-- Modals & Badges Specs details -->
-                <div class="p-8 md:p-12 space-y-8">
-                    <div>
-                        <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // SYSTEM BADGES</span>
-                        <h5 class="text-xs font-mono font-bold uppercase tracking-wider text-stone-900 mb-6">Glass & Status Badges</h5>
-                        <div class="flex flex-wrap items-center gap-4">
-                            <span class="px-3 py-1.5 border border-white/80 rounded-full text-[10px] font-mono uppercase bg-pure/45 backdrop-blur-md text-stone-900 shadow-sm">
-                                Glass Pill
-                            </span>
-                            <span class="px-3 py-1 border border-stone-900 rounded-full text-[10px] font-mono uppercase bg-stone-950 text-white">
-                                Dark Stencil
-                            </span>
-                            <span class="px-2.5 py-1.5 border border-stone-300 rounded text-[9px] font-mono uppercase bg-pure/80 text-stone-600 flex items-center gap-1.5 shadow-sm">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                                Connected
-                            </span>
-                        </div>
-                    </div>
+                <div class="flex flex-col items-center gap-3 p-6 group cursor-pointer reveal delay-200 hover:bg-surface rounded-xl transition-colors">
+                    <iconify-icon class="text-3xl text-obsidian group-hover:-translate-y-1 transition-transform" icon="solar:bolt-linear"></iconify-icon>
+                    <span class="text-[9px] font-mono text-muted">bolt</span>
                 </div>
-
-                <!-- Tooltips interactive test zone -->
-                <div class="p-8 md:p-12">
-                    <div>
-                        <span class="text-[10px] font-mono text-stone-400 block mb-6">COMPONENTS // TOOLTIPS INTERACTION</span>
-                        <h5 class="text-xs font-mono font-bold uppercase tracking-wider text-stone-900 mb-6">Hover Tooltip triggers</h5>
-                        <div class="p-6 border border-stone-300/40 bg-pure/40 rounded-sm flex items-center justify-around">
-                            <!-- Tooltip wrapper -->
-                            <div class="relative group cursor-pointer inline-block">
-                                <span class="text-xs font-mono font-bold border-b border-dashed border-stone-600 hover:text-accent hover:border-accent pb-0.5 transition-colors">
-                                    Passe o mouse por aqui
-                                </span>
-                                <!-- Tooltip element -->
-                                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-stone-950 text-white text-[10px] font-mono p-3 rounded shadow-2xl opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none text-center z-40">
-                                    Tooltip Box: Easing elastic-spring v2.0
-                                    <!-- arrow -->
-                                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-stone-950"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="flex flex-col items-center gap-3 p-6 group cursor-pointer reveal delay-300 hover:bg-surface rounded-xl transition-colors">
+                    <iconify-icon class="text-3xl text-obsidian group-hover:scale-110 transition-transform" icon="solar:widget-5-linear"></iconify-icon>
+                    <span class="text-[9px] font-mono text-muted">widget</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-6 group cursor-pointer reveal delay-100 hover:bg-surface rounded-xl transition-colors">
+                    <iconify-icon class="text-3xl text-obsidian group-hover:rotate-[360deg] duration-700 transition-transform" icon="solar:atom-linear"></iconify-icon>
+                    <span class="text-[9px] font-mono text-muted">atom</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-6 group cursor-pointer reveal delay-200 hover:bg-surface rounded-xl transition-colors">
+                    <iconify-icon class="text-3xl text-obsidian group-hover:-translate-y-1 transition-transform" icon="solar:magic-stick-3-linear"></iconify-icon>
+                    <span class="text-[9px] font-mono text-muted">magic-stick</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-6 group cursor-pointer reveal delay-300 hover:bg-surface rounded-xl transition-colors">
+                    <iconify-icon class="text-3xl text-obsidian group-hover:scale-110 transition-transform" icon="solar:palette-linear"></iconify-icon>
+                    <span class="text-[9px] font-mono text-muted">palette</span>
                 </div>
             </div>
         </section>
 
-        <!-- 4) ICONOGRAPHY SECTION -->
-        <section id="icons" class="relative z-10 border-b border-stone-300 bg-[#EAEAE5]">
-            <div class="p-8 md:p-12 border-b border-stone-300 bg-pure/40">
-                <span class="text-xs font-mono uppercase text-accent tracking-widest block mb-2">04 / Assets</span>
-                <h2 class="text-4xl font-bold tracking-tight text-stone-900">Iconography Library</h2>
-            </div>
-
-            <!-- Icon Showcase Grid -->
-            <div class="p-8 md:p-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 justify-items-center">
-                <!-- Icon Card 1 -->
-                <div class="flex flex-col items-center gap-3 p-4 bg-pure/50 hover:bg-white border border-stone-300 rounded-sm w-full group cursor-pointer" onclick="copyIcon('solar:atom-linear')">
-                    <iconify-icon class="text-3xl text-stone-850 group-hover:scale-110 group-hover:text-accent transition-all duration-300" icon="solar:atom-linear"></iconify-icon>
-                    <span class="text-[9px] font-mono text-stone-500">solar:atom</span>
-                </div>
-
-                <!-- Icon Card 2 -->
-                <div class="flex flex-col items-center gap-3 p-4 bg-pure/50 hover:bg-white border border-stone-300 rounded-sm w-full group cursor-pointer" onclick="copyIcon('solar:layers-minimalistic-linear')">
-                    <iconify-icon class="text-3xl text-stone-850 group-hover:scale-110 group-hover:text-accent transition-all duration-300" icon="solar:layers-minimalistic-linear"></iconify-icon>
-                    <span class="text-[9px] font-mono text-stone-500">solar:layers</span>
-                </div>
-
-                <!-- Icon Card 3 -->
-                <div class="flex flex-col items-center gap-3 p-4 bg-pure/50 hover:bg-white border border-stone-300 rounded-sm w-full group cursor-pointer" onclick="copyIcon('solar:clock-circle-linear')">
-                    <iconify-icon class="text-3xl text-stone-850 group-hover:scale-110 group-hover:text-accent transition-all duration-300" icon="solar:clock-circle-linear"></iconify-icon>
-                    <span class="text-[9px] font-mono text-stone-500">solar:clock</span>
-                </div>
-
-                <!-- Icon Card 4 -->
-                <div class="flex flex-col items-center gap-3 p-4 bg-pure/50 hover:bg-white border border-stone-300 rounded-sm w-full group cursor-pointer" onclick="copyIcon('solar:cup-star-linear')">
-                    <iconify-icon class="text-3xl text-stone-850 group-hover:scale-110 group-hover:text-accent transition-all duration-300" icon="solar:cup-star-linear"></iconify-icon>
-                    <span class="text-[9px] font-mono text-stone-500">solar:cup-star</span>
-                </div>
-
-                <!-- Icon Card 5 -->
-                <div class="flex flex-col items-center gap-3 p-4 bg-pure/50 hover:bg-white border border-stone-300 rounded-sm w-full group cursor-pointer" onclick="copyIcon('solar:arrow-right-up-linear')">
-                    <iconify-icon class="text-3xl text-stone-850 group-hover:scale-110 group-hover:text-accent transition-all duration-300" icon="solar:arrow-right-up-linear"></iconify-icon>
-                    <span class="text-[9px] font-mono text-stone-500">solar:arrow-up</span>
-                </div>
-
-                <!-- Icon Card 6 -->
-                <div class="flex flex-col items-center gap-3 p-4 bg-pure/50 hover:bg-white border border-stone-300 rounded-sm w-full group cursor-pointer" onclick="copyIcon('solar:check-circle-linear')">
-                    <iconify-icon class="text-3xl text-stone-850 group-hover:scale-110 group-hover:text-accent transition-all duration-300" icon="solar:check-circle-linear"></iconify-icon>
-                    <span class="text-[9px] font-mono text-stone-500">solar:check</span>
-                </div>
-            </div>
-
-            <!-- Icon Code usage reference -->
-            <div class="p-8 md:p-12 border-t border-stone-300 bg-pure/45 text-xs font-mono text-stone-600">
-                <span class="text-stone-900 font-bold block mb-2">HOW TO INCLUDE ICONS</span>
-                <p class="mb-4">Clique em qualquer bloco acima para copiar o snippet HTML do componente de ícone, ou use as seguintes tags:</p>
-                <div class="bg-stone-900 text-white p-4 rounded-sm overflow-x-auto shadow-inner">
-                    <code>&lt;iconify-icon icon="solar:atom-linear"&gt;&lt;/iconify-icon&gt;</code>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5) ANIMATIONS & MOTION SYSTEM SECTION -->
-        <section id="motion" class="relative z-10 border-b border-stone-300 bg-pure/10 overflow-hidden">
-            <div class="p-8 md:p-12 border-b border-stone-300 bg-pure/40">
-                <span class="text-xs font-mono uppercase text-accent tracking-widest block mb-2">05 / Interaction</span>
-                <h2 class="text-4xl font-bold tracking-tight text-stone-900">Motion System Guide</h2>
-            </div>
-
-            <!-- Scroll trigger reveal showcase -->
-            <div class="p-8 md:p-12 border-b border-stone-300 space-y-6">
-                <span class="text-[10px] font-mono text-stone-400 block">SCROLL TRIGGERS // REVEALS AND STAGGERING</span>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="p-6 border border-stone-300 bg-pure/50 reveal">
-                        <span class="text-xs font-mono text-accent block mb-2">Class: .reveal</span>
-                        <h4 class="text-lg font-bold text-stone-900">Base Reveal</h4>
-                        <p class="text-[10px] text-stone-500 mt-2">Triggered by scroll intersection observer with 0.15 threshold.</p>
-                    </div>
-                    <div class="p-6 border border-stone-300 bg-pure/50 reveal delay-100">
-                        <span class="text-xs font-mono text-accent block mb-2">Class: .delay-100</span>
-                        <h4 class="text-lg font-bold text-stone-900">Delay 100ms</h4>
-                        <p class="text-[10px] text-stone-500 mt-2">Adds staggered delays to coordinate element emergence groups.</p>
-                    </div>
-                    <div class="p-6 border border-stone-300 bg-pure/50 reveal delay-200">
-                        <span class="text-xs font-mono text-accent block mb-2">Class: .delay-200</span>
-                        <h4 class="text-lg font-bold text-stone-900">Delay 200ms</h4>
-                        <p class="text-[10px] text-stone-500 mt-2">Recommended delay step for continuous grids.</p>
-                    </div>
-                    <div class="p-6 border border-stone-300 bg-pure/50 reveal delay-300">
-                        <span class="text-xs font-mono text-accent block mb-2">Class: .delay-300</span>
-                        <h4 class="text-lg font-bold text-stone-900">Delay 300ms</h4>
-                        <p class="text-[10px] text-stone-500 mt-2">Slow stagger to guide readability and visual focus.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Custom CSS Loop Animations Showcase -->
-            <div class="p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-stone-300 bg-pure/15">
-                <!-- Float effect -->
-                <div class="p-6 flex flex-col justify-between items-center text-center h-[260px]">
-                    <span class="text-[9px] font-mono text-stone-400">MOTION // FLOATING ACCENT</span>
-                    <!-- Floating asset -->
-                    <div class="w-16 h-16 bg-[#FF3300] shadow-xl shadow-red-200/50 rounded-sm flex items-center justify-center text-white animate-float my-auto">
-                        <iconify-icon class="text-2xl" icon="solar:star-fall-bold-duotone"></iconify-icon>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-stone-900 block">Floating Animation</span>
-                        <span class="text-[9px] font-mono text-stone-500 mt-1 block">Class: animate-float</span>
-                    </div>
-                </div>
-
-                <!-- Morphing asset shape -->
-                <div class="p-6 flex flex-col justify-between items-center text-center h-[260px]">
-                    <span class="text-[9px] font-mono text-stone-400">MOTION // SHAPE MORPH</span>
-                    <!-- Morphing container -->
-                    <div class="w-20 h-20 bg-stone-900 text-white flex items-center justify-center animate-morph my-auto">
-                        <iconify-icon class="text-2xl text-acid" icon="solar:record-bold-duotone"></iconify-icon>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-stone-900 block">Morphing Shape border</span>
-                        <span class="text-[9px] font-mono text-stone-500 mt-1 block">Class: animate-morph</span>
-                    </div>
-                </div>
-
-                <!-- Spin Slow asset -->
-                <div class="p-6 flex flex-col justify-between items-center text-center h-[260px]">
-                    <span class="text-[9px] font-mono text-stone-400">MOTION // SPIN ACCENT</span>
-                    <!-- Spinning container -->
-                    <div class="w-20 h-20 rounded-full border-2 border-stone-900 border-dashed flex items-center justify-center animate-spin-slow my-auto">
-                        <iconify-icon class="text-3xl text-stone-850" icon="solar:atom-linear"></iconify-icon>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-stone-900 block">Continuous Spin Slow</span>
-                        <span class="text-[9px] font-mono text-stone-500 mt-1 block">Class: animate-spin-slow</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- System Footer -->
-        <footer class="relative z-10 bg-stone-900 text-stone-400 py-16 text-center border-t border-stone-300">
-            <div class="max-w-2xl mx-auto px-6 flex flex-col items-center">
-                <iconify-icon class="text-4xl text-white mb-4 animate-spin-slow" icon="solar:atom-bold-duotone"></iconify-icon>
-                <h3 class="text-xl font-bold font-sans text-white uppercase tracking-widest mb-2">Aura Design System</h3>
-                <p class="text-xs text-stone-500 font-mono mb-8">Generated under strict guidelines of minimal design, transparent typography, and light canvas aesthetics.</p>
-                <div class="text-[10px] font-mono text-stone-600">
-                    © 2026 AURA. ALL SPECIFICATIONS COMPLIANT WITH AA/AAA STANDARDS.
-                </div>
-            </div>
+        <!-- Footer -->
+        <footer class="bg-obsidian text-white py-12 text-center relative z-10">
+            <h2 class="text-4xl font-bold tracking-tighter text-transparent-stroke mb-4 text-white" style="-webkit-text-stroke: 1px rgba(255,255,255,0.5);">AURA</h2>
+            <span class="text-[10px] font-mono uppercase text-stone-500 tracking-widest">End of Spec File</span>
         </footer>
     </div>
 
-    <!-- Modal Demonstration Container -->
-    <div id="demo-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <!-- Modal backdrop shadow overlay -->
-            <div class="fixed inset-0 bg-[#EAEAE5]/65 backdrop-blur-md transition-opacity" aria-hidden="true" onclick="toggleModal('demo-modal')"></div>
-
-            <!-- This element is to trick the browser into centering the modal contents. -->
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <!-- Modal Panel box -->
-            <div class="inline-block align-bottom bg-white border border-stone-300 p-8 text-left shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full rounded-sm opacity-0 translate-y-4 duration-300" id="modal-panel-content">
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <span class="text-[9px] font-mono text-accent uppercase tracking-widest block">System overlay</span>
-                        <h3 class="text-lg font-bold text-stone-900" id="modal-title">AURA DIALOG OVERLAY</h3>
-                    </div>
-                    <button class="text-stone-400 hover:text-stone-950 transition-colors flex items-center justify-center" onclick="toggleModal('demo-modal')">
-                        <iconify-icon class="text-xl" icon="solar:close-circle-linear"></iconify-icon>
-                    </button>
+    <!-- The Demo Modal -->
+    <div id="demo-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-white/40 backdrop-blur-sm transition-opacity" onclick="toggleDemoModal()"></div>
+        
+        <!-- Modal Body -->
+        <div class="modal-content glass-panel w-[90%] max-w-md p-8 rounded-2xl relative z-10 shadow-2xl">
+            <button onclick="toggleDemoModal()" class="absolute top-4 right-4 text-muted hover:text-obsidian transition-colors">
+                <iconify-icon class="text-xl" icon="solar:close-circle-linear"></iconify-icon>
+            </button>
+            <div class="mb-8">
+                <div class="w-12 h-12 bg-surface rounded-full flex items-center justify-center mb-6">
+                    <iconify-icon class="text-2xl text-obsidian" icon="solar:shield-check-linear"></iconify-icon>
                 </div>
-                <div class="space-y-4 mb-8">
-                    <p class="text-xs text-stone-600 leading-relaxed">
-                        Este é um exemplo de modal com transição suave. O fundo é desfocado usando o filtro de desfoque backdrop-blur-md sobre a cor principal do design system.
-                    </p>
-                    <div class="p-4 bg-[#EAEAE5]/40 border border-stone-200 text-[10px] font-mono text-stone-600 rounded-sm">
-                        Transition Specs:<br/>
-                        Backdrop: opacity 0.3s ease-out<br/>
-                        Panel: scale & translate 0.4s cubic-bezier(0.16, 1, 0.3, 1)
-                    </div>
-                </div>
-                <div class="flex justify-end gap-3 font-mono text-xs">
-                    <button class="px-5 py-3 border border-stone-300 hover:bg-stone-55 transition-colors uppercase tracking-wider rounded-sm" onclick="toggleModal('demo-modal')">
-                        Cancelar
-                    </button>
-                    <button class="px-5 py-3 bg-stone-900 text-white hover:bg-stone-750 transition-all uppercase tracking-wider rounded-sm" onclick="toggleModal('demo-modal')">
-                        Confirmar
-                    </button>
-                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-obsidian mb-2">Glassmorphism Modal</h3>
+                <p class="text-sm text-muted leading-relaxed">This modal uses the <code>.slideUpFade</code> keyframes and a heavily blurred backdrop, demonstrating overlay capabilities.</p>
+            </div>
+            <div class="flex gap-3">
+                <button class="flex-1 px-4 py-2 bg-obsidian text-white text-xs font-mono uppercase rounded hover:bg-charcoal transition-colors">Confirm</button>
+                <button onclick="toggleDemoModal()" class="flex-1 px-4 py-2 border border-borderLight text-obsidian text-xs font-mono uppercase rounded hover:bg-surface transition-colors">Dismiss</button>
             </div>
         </div>
     </div>
 
-    <!-- Scripting for UI and animation controllers -->
     <script>
+        // Modal Logic
+        function toggleDemoModal() {
+            const modal = document.getElementById('demo-modal');
+            modal.classList.toggle('active');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Scroll Progress Bar logic
+            // Hero Initial Animations
+            setTimeout(() => {
+                document.getElementById('hero-title').classList.add('reveal-active');
+            }, 300);
+
+            // Scroll Progress
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
-                document.getElementById('scroll-progress').style.width = scrolled + '%';
+                document.getElementById("scroll-progress").style.width = scrolled + "%";
             });
 
-            // 2. Scroll Intersection Observer for Reveals
-            const revealOptions = {
+            // Intersection Observer for Elements
+            const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.12
+                threshold: 0.1
             };
 
-            const revealObserver = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // Also trigger text reveals in child nodes
-                        const textWrappers = entry.target.querySelectorAll('.text-reveal-wrapper');
-                        if (textWrappers.length > 0 || entry.target.classList.contains('text-reveal-wrapper')) {
-                            entry.target.classList.add('reveal-active');
-                        }
                     }
                 });
-            }, revealOptions);
+            }, observerOptions);
 
-            // Observe all reveal nodes
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-            // Observe headers or display titles that have text reveals
-            document.querySelectorAll('h1, h2').forEach(el => {
-                if (el.querySelector('.text-reveal-content')) {
-                    revealObserver.observe(el);
-                }
-            });
-
-            // Trigger hero titles instantly on page load
-            setTimeout(() => {
-                const heroTitle = document.getElementById('hero-title');
-                if (heroTitle) {
-                    heroTitle.classList.add('reveal-active');
-                }
-            }, 300);
-
-            // 3. Flashlight Mouse Coordinate tracker
-            const flashlightCard = document.getElementById('card-flashlight-demo');
-            if (flashlightCard) {
-                flashlightCard.addEventListener('mousemove', (e) => {
-                    const rect = flashlightCard.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    flashlightCard.style.setProperty('--mouse-x', `${x}px`);
-                    flashlightCard.style.setProperty('--mouse-y', `${y}px`);
-                });
-            }
-
-            // 4. Header shrink effect on scroll
-            const mainNav = document.getElementById('main-nav');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 40) {
-                    mainNav.classList.remove('py-4');
-                    mainNav.classList.add('py-2', 'shadow-md', 'bg-[#EAEAE5]/95');
-                } else {
-                    mainNav.classList.remove('py-2', 'shadow-md', 'bg-[#EAEAE5]/95');
-                    mainNav.classList.add('py-4');
-                }
-            });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
-
-        // Toggle Modal Overlay
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const panel = document.getElementById('modal-panel-content');
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    panel.classList.remove('opacity-0', 'translate-y-4');
-                    panel.classList.add('opacity-100', 'translate-y-0');
-                }, 50);
-            } else {
-                panel.classList.remove('opacity-100', 'translate-y-0');
-                panel.classList.add('opacity-0', 'translate-y-4');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                }, 300);
-            }
-        }
-
-        // Copy Color to clipboard
-        function copyColor(hexValue) {
-            navigator.clipboard.writeText(hexValue).then(() => {
-                showToast(`Color Copied: ${hexValue}`);
-            });
-        }
-
-        // Copy Icon code to clipboard
-        function copyIcon(iconCode) {
-            const snippet = `<iconify-icon icon="${iconCode}"></iconify-icon>`;
-            navigator.clipboard.writeText(snippet).then(() => {
-                showToast(`Icon Snippet Copied!`);
-            });
-        }
-
-        // Show toast notifications
-        function showToast(message) {
-            const toast = document.getElementById('toast-alert');
-            const toastMsg = document.getElementById('toast-message');
-            toastMsg.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Background media play/pause controls
-        function controlMedia(action) {
-            const video = document.querySelector('video');
-            if (video) {
-                if (action === 'play') {
-                    video.play();
-                    showToast('Background video started');
-                } else if (action === 'pause') {
-                    video.pause();
-                    showToast('Background video paused');
-                }
-            }
-        }
     </script>
 </body>
-
 </html>
