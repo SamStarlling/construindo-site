@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Artools Precision Pen - A Caneta Mais Tecnológica do Mundo</title>
+    <meta name="description" content="Experimente a nova Artools Precision Pen. Desenhada para criadores." />
+
+    <!-- External Assets -->
+    <script src="templates/digital-architect.aura.build/assets/resource_3fa48481346f.js"></script>
+    <script src="templates/digital-architect.aura.build/assets/iconify-icon_d39ffc6e4c56.js"></script>
+    <link href="templates/digital-architect.aura.build/assets/css2_19fd9cc6b396.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration (Same as design_system.html) -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        base: '#FFFFFF',
+                        surface: '#FAFAFA',
+                        surface2: '#F4F4F5',
+                        obsidian: '#09090B',
+                        charcoal: '#1C1C1C',
+                        muted: '#71717A',
+                        borderLight: 'rgba(9, 9, 11, 0.08)',
+                        accent: '#09090B',
+                        neon: '#FF3300',
+                        glow: 'rgba(255, 51, 0, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { overflow-x: hidden; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1C1C1C;
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E4E4E7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A1A1AA;
+        }
+
+        /* Video specific fixes */
+        .video-container {
+            /* Fix rounding issues in some browsers */
+            transform: translateZ(0); 
+            will-change: transform;
+        }
+        
+        .overlay-text {
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none; /* Let clicks pass to anything below if needed */
+        }
+
+        .overlay-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-obsidian selection:text-white">
+
+    <!-- HERO SCROLL CONTAINER -->
+    <!-- h-[400vh] provides 3 viewports of scrolling distance to animate the video -->
+    <div id="hero-scroll-container" class="relative w-full h-[400vh] bg-base">
+        
+        <!-- STICKY WRAPPER: Stays fixed to the viewport while scrolling the 400vh container -->
+        <section id="hero-section" class="sticky top-0 w-full h-screen overflow-hidden video-container flex items-center justify-center bg-obsidian">
+            
+            <!-- THE VIDEO -->
+            <video 
+                id="hero-video" 
+                class="absolute inset-0 w-full h-full object-cover scale-[1.02]" 
+                src="assets/White_pen_writing__Crie._Desenhe…_202607081614.mp4" 
+                muted 
+                playsinline 
+                preload="auto">
+            </video>
+
+            <!-- DARK GRADIENT OVERLAY (ensures white text is readable regardless of video frame) -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 pointer-events-none z-10 mix-blend-multiply"></div>
+
+            <!-- TEXT OVERLAYS -->
+            <div class="relative z-20 w-full max-w-[1440px] px-8 md:px-16 mx-auto h-full flex flex-col justify-center items-center text-center text-white">
+                
+                <!-- TEXT 1: Appears at start -->
+                <div id="text-1" class="absolute overlay-text visible">
+                    <h1 class="font-display text-6xl md:text-[120px] font-semibold tracking-tighter leading-none mb-6">
+                        Precision Pen
+                    </h1>
+                    <p class="text-xl md:text-3xl font-light tracking-wide text-white/90">
+                        A caneta mais tecnológica do mundo.
+                    </p>
+                </div>
+
+                <!-- TEXT 2: Appears in the middle -->
+                <div id="text-2" class="absolute overlay-text">
+                    <h2 class="font-display text-5xl md:text-[90px] font-semibold tracking-tighter leading-none mb-6">
+                        Crie. Desenhe. Sinta.
+                    </h2>
+                    <p class="text-lg md:text-2xl font-light max-w-2xl mx-auto text-white/90 leading-relaxed">
+                        Resposta instantânea, pressão milimétrica e acabamento em alumínio aeroespacial.
+                    </p>
+                </div>
+
+                <!-- TEXT 3: Appears at the end -->
+                <div id="text-3" class="absolute overlay-text">
+                    <span class="text-[12px] md:text-[14px] font-mono uppercase tracking-[0.3em] text-white/70 block mb-8">Pronta para o futuro</span>
+                    <h2 class="font-display text-5xl md:text-[90px] font-semibold tracking-tighter leading-none mb-10">
+                        Redefina seus traços.
+                    </h2>
+                    <button class="bg-white text-obsidian px-10 py-5 rounded-full font-semibold tracking-tight text-lg hover:scale-105 hover:bg-surface2 transition-all duration-300 shadow-2xl">
+                        Compre Agora
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- NEXT SECTION (Just a placeholder so the user can scroll past the hero) -->
+    <section class="relative z-30 w-full min-h-screen bg-obsidian flex flex-col items-center justify-center border-t border-white/10 px-8 text-center">
+        <h2 class="font-display text-5xl md:text-7xl font-semibold text-white tracking-tighter mb-6">O Próximo Capítulo.</h2>
+        <p class="text-muted text-xl md:text-2xl font-light max-w-xl">O conteúdo continua fluindo naturalmente aqui em baixo.</p>
+    </section>
+
+    <!-- SCRIPT FOR SCROLL-DRIVEN VIDEO -->
+    <script>
+        const video = document.getElementById('hero-video');
+        const scrollContainer = document.getElementById('hero-scroll-container');
+        
+        const text1 = document.getElementById('text-1');
+        const text2 = document.getElementById('text-2');
+        const text3 = document.getElementById('text-3');
+
+        // Force pause
+        video.pause();
+
+        // Update video and texts based on scroll
+        function updateHeroOnScroll() {
+            const containerRect = scrollContainer.getBoundingClientRect();
+            
+            // How many pixels have we scrolled past the TOP of the container?
+            const scrollPixels = -containerRect.top;
+            
+            // The total distance we can scroll while the sticky section remains pinned
+            const scrollableHeight = containerRect.height - window.innerHeight;
+            
+            // Progress from 0.0 to 1.0
+            let progress = scrollPixels / scrollableHeight;
+            progress = Math.max(0, Math.min(1, progress));
+            
+            // Update Video Frame
+            if (video.readyState >= 1 && video.duration) {
+                // To avoid errors, we never hit exactly duration, but duration - 0.1
+                const maxTime = video.duration - 0.1;
+                video.currentTime = progress * maxTime;
+            }
+
+            // --- Update Text Visibility ---
+            
+            // Text 1: 0% to 25%
+            if (progress >= 0 && progress < 0.25) {
+                text1.classList.add('visible');
+            } else {
+                text1.classList.remove('visible');
+            }
+
+            // Text 2: 35% to 60%
+            if (progress > 0.35 && progress < 0.6) {
+                text2.classList.add('visible');
+            } else {
+                text2.classList.remove('visible');
+            }
+
+            // Text 3: 70% to 100%
+            if (progress > 0.7) {
+                text3.classList.add('visible');
+            } else {
+                text3.classList.remove('visible');
+            }
+
+            requestAnimationFrame(updateHeroOnScroll);
+        }
+
+        // Initialize when metadata loads to get correct duration
+        video.addEventListener('loadedmetadata', () => {
+            requestAnimationFrame(updateHeroOnScroll);
+        });
+
+        // Also start loop immediately in case it's already cached
+        requestAnimationFrame(updateHeroOnScroll);
+    </script>
+</body>
+</html>
