@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artools Precision Pen — A caneta mais tecnológica do mundo</title>
-    <meta name="description" content="Artools Precision Pen redefine o equilíbrio entre peso, fluxo e design. Feita para criadores que exigem perfeição em cada traço.">
-    
+    <meta name="description"
+        content="Artools Precision Pen redefine o equilíbrio entre peso, fluxo e design. Feita para criadores que exigem perfeição em cada traço.">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- CDN Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    
+
     <style>
         /* ==========================================
-           1. RESET + VARIÁVEIS 
+           1. RESET + VARIÁVEIS
            ========================================== */
         :root {
             --base: #FFFFFF;
@@ -48,18 +51,23 @@
         }
 
         /* Lenis Required CSS */
-        html.lenis, html.lenis body {
+        html.lenis,
+        html.lenis body {
             height: auto;
         }
+
         .lenis.lenis-smooth {
             scroll-behavior: auto !important;
         }
+
         .lenis.lenis-smooth [data-lenis-prevent] {
             overscroll-behavior: contain;
         }
+
         .lenis.lenis-stopped {
             overflow: hidden;
         }
+
         .lenis.lenis-scrolling iframe {
             pointer-events: none;
         }
@@ -73,14 +81,14 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.3); /* Escurecido para dar mais destaque */
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-logo {
@@ -110,26 +118,31 @@
         .header-nav a {
             color: #FFFFFF;
             font-size: 13px;
+            font-weight: 600; /* Mais destaque */
             letter-spacing: 2.5px;
             text-transform: uppercase;
             text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+            opacity: 1; /* Opacidade total para não sumir */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6); /* Sombra para destacar em fundos claros */
+            transition: all 0.3s;
             position: relative;
         }
 
         .header-nav a:hover {
-            opacity: 1;
+            opacity: 0.8;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
         .header-nav span.separator {
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.6);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
         .header-cart {
             font-size: 18px;
             color: #FFFFFF;
             text-decoration: none;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
         .hamburger {
@@ -145,7 +158,8 @@
         #hero {
             position: relative;
             width: 100%;
-            height: 400vh; /* Scrollable area */
+            height: 400vh;
+            /* Scrollable area */
             background-color: var(--obsidian);
         }
 
@@ -181,9 +195,9 @@
             height: 100%;
             z-index: 2;
             /* Overlay em duas camadas como exigido */
-            background: 
-                linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
-                linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3) 100%);
+            background:
+                linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%),
+                linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
             pointer-events: none;
         }
 
@@ -199,7 +213,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 80vh; /* Centering helper within its constraints */
+            height: 80vh;
+            /* Centering helper within its constraints */
         }
 
         .hero-title {
@@ -347,9 +362,17 @@
         }
 
         @keyframes pulse-scroll {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-            100% { opacity: 0.3; }
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
         }
 
         /* ==========================================
@@ -360,7 +383,7 @@
             inset: 0;
             z-index: 2;
             pointer-events: none;
-            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
             background-size: 40px 40px;
             opacity: 0.3;
         }
@@ -376,16 +399,26 @@
                 align-items: center;
                 text-align: center;
             }
-            .hero-title .line-1, .hero-title .line-2, .hero-title .line-3 {
+
+            .hero-title .line-1,
+            .hero-title .line-2,
+            .hero-title .line-3 {
                 font-size: clamp(2.5rem, 5vw, 3.8rem);
             }
         }
 
         @media (max-width: 768px) {
-            .header-nav { display: none; }
-            .hamburger { display: block; }
-            
-            .hero-title .line-1, .hero-title .line-2, .hero-title .line-3 {
+            .header-nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-title .line-1,
+            .hero-title .line-2,
+            .hero-title .line-3 {
                 font-size: clamp(2rem, 8vw, 2.8rem);
             }
 
@@ -399,8 +432,10 @@
                 width: 100%;
             }
 
-            .hero-indicator, .hero-scroll {
-                display: none; /* Oculto em mobile */
+            .hero-indicator,
+            .hero-scroll {
+                display: none;
+                /* Oculto em mobile */
             }
         }
 
@@ -423,12 +458,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
+
 <body>
-    
+
     <!-- HEADER -->
     <header role="banner">
         <a href="#" class="header-logo">ARTOOLS.</a>
@@ -442,24 +478,19 @@
         <a href="#" class="header-cart" aria-label="Carrinho">👜</a>
         <div class="hamburger">☰</div>
     </header>
-    
+
     <!-- HERO SECTION -->
     <section id="hero">
         <div class="hero-container">
             <!-- VÍDEO -->
-            <video 
-                id="hero-video" 
-                src="assets/White_pen_writing__Crie._Desenhe…_202607081614.mp4" 
-                poster="assets/White_ARTOOLS_pen_floating_diago…_202607091112.jpeg"
-                muted 
-                playsinline 
-                preload="auto">
+            <video id="hero-video" src="assets/White_pen_writing__Crie._Desenhe…_202607081614.mp4"
+                poster="assets/White_ARTOOLS_pen_floating_diago…_202607091112.jpeg" muted playsinline preload="auto">
             </video>
-            
+
             <!-- OVERLAYS -->
             <div class="hero-overlay"></div>
             <div class="particles-layer"></div>
-            
+
             <!-- CONTENT -->
             <div class="hero-content">
                 <h1 class="hero-title" aria-label="A caneta mais tecnológica do mundo.">
@@ -467,23 +498,25 @@
                     <span class="line-2">mais tecnológica</span>
                     <span class="line-3">do mundo.</span>
                 </h1>
-                
+
                 <p class="hero-description">
-                    A Artools Precision Pen redefine o equilíbrio entre peso, fluxo e design. Feita para criadores que exigem perfeição em cada traço.
+                    A Artools Precision Pen redefine o equilíbrio entre peso, fluxo e design. Feita para criadores que
+                    exigem perfeição em cada traço.
                 </p>
-                
+
                 <div class="hero-ctas">
-                    <button class="btn-primary btn-magnetic" aria-label="Comprar Artools Precision Pen">Comprar Agora</button>
+                    <button class="btn-primary btn-magnetic" aria-label="Comprar Artools Precision Pen">Comprar
+                        Agora</button>
                     <button class="btn-secondary btn-magnetic" aria-label="Explorar produto">Explorar ↓</button>
                 </div>
             </div>
-            
+
             <!-- INDICATORS -->
             <div class="hero-indicator" aria-hidden="true">
                 <span id="progress-text">01</span>
                 <div class="indicator-line"></div>
             </div>
-            
+
             <!-- PROMPT -->
             <div class="hero-scroll" aria-hidden="true">
                 <span>SCROLL TO CONTROL</span>
@@ -491,14 +524,14 @@
             </div>
         </div>
     </section>
-    
+
     <!-- NEXT SECTION (Placeholder) -->
-    <section class="next-section">
+    <!-- <section class="next-section">
         <div style="text-align: center;">
             <h2 style="font-weight: 600; font-size: 3rem; margin-bottom: 20px;">O fluxo continua</h2>
             <p style="color: var(--muted); font-size: 1.2rem;">Conteúdo fluindo livremente após o parallax hero.</p>
         </div>
-    </section>
+    </section> -->
 
     <!-- SCRIPTS -->
     <script>
@@ -534,7 +567,7 @@
             requestAnimationFrame(raf);
 
             lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time)=>{
+            gsap.ticker.add((time) => {
                 lenis.raf(time * 1000);
             });
             gsap.ticker.lagSmoothing(0, 0);
@@ -575,12 +608,9 @@
            3. VIDEO PARALLAX & PROMPT FADE
            ========================================== */
         if (!prefersReducedMotion && !isMobile) {
-            // Guarantee video metadata is loaded before creating ScrollTrigger
-            video.addEventListener('loadedmetadata', () => {
-                // Video Parallax Scrub
-                gsap.to(video, {
-                    currentTime: video.duration - 0.1, // Prevent ending errors
-                    ease: 'none',
+            function initVideoParallax() {
+                // Cria uma timeline atrelada ao scroll (Scrub Timeline)
+                const scrubTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: heroSection,
                         start: 'top top',
@@ -597,18 +627,42 @@
                     }
                 });
 
-                // Fade out SCROLL TO CONTROL when user scrolls
-                gsap.to(heroScrollPrompt, {
+                // 1. Anima o vídeo do frame 0 ao final
+                scrubTl.fromTo(video,
+                    { currentTime: 0 },
+                    { currentTime: video.duration - 0.1, ease: 'none' },
+                    0 // inicia no tempo 0 da timeline
+                );
+
+                // 2. Anima os componentes da tela (Exibindo e Sumindo)
+
+                // Fade out do SCROLL TO CONTROL rapidamente no início do scroll
+                scrubTl.to(heroScrollPrompt, { opacity: 0, duration: 0.1 }, 0);
+
+                // Fade out da Headline e Parágrafo após 25% do scroll
+                scrubTl.to('.hero-title, .hero-description', {
                     opacity: 0,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: heroSection,
-                        start: 'top top',
-                        end: '+=150', // fades out completely after 150px
-                        scrub: true
-                    }
-                });
-            });
+                    y: -40,
+                    duration: 0.2,
+                    stagger: 0.05
+                }, 0.25);
+
+                // No final do scroll (perto de 80%), damos destaque aos botões centralizando-os
+                // Mas a estrutura pediu alinhado à esquerda. Vamos apenas fazer um fade out suave
+                // e trazer o indicador junto.
+                scrubTl.to('.hero-ctas', {
+                    opacity: 0,
+                    y: -20,
+                    duration: 0.15
+                }, 0.45);
+            }
+
+            // Garante que o ScrollTrigger só seja criado QUANDO o vídeo tiver os dados de duração
+            if (video.readyState >= 1) {
+                initVideoParallax();
+            } else {
+                video.addEventListener('loadedmetadata', initVideoParallax);
+            }
         } else if (prefersReducedMotion || isMobile) {
             // Autoplay on mobile or reduced motion
             video.autoplay = true;
@@ -627,7 +681,7 @@
                     const rect = btn.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-                    
+
                     // Cap the maximum magnetic pull to 8px
                     const cappedX = Math.min(Math.max(x * 0.3, -8), 8);
                     const cappedY = Math.min(Math.max(y * 0.3, -8), 8);
@@ -646,4 +700,5 @@
         }
     </script>
 </body>
+
 </html>
