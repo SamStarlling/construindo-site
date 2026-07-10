@@ -165,15 +165,12 @@
         #hero {
             position: relative;
             width: 100%;
-            height: 400vh;
-            /* Scrollable area */
+            height: 100vh;
             background-color: var(--obsidian);
         }
 
         .hero-container {
-            position: sticky;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
             height: 100vh;
             overflow: hidden;
@@ -524,7 +521,7 @@
         <div class="hero-container">
             <!-- VÍDEO -->
             <video id="hero-video" src="assets/video2.mp4"
-                poster="assets/White_ARTOOLS_pen_floating_diago…_202607091112.jpeg" muted playsinline preload="auto">
+                muted playsinline preload="auto" autoplay loop>
             </video>
 
             <!-- OVERLAYS -->
@@ -656,13 +653,14 @@
            ========================================== */
         if (!prefersReducedMotion && !isMobile) {
             function initVideoParallax() {
-                // Cria uma timeline atrelada ao scroll (Scrub Timeline)
+                // Cria uma timeline atrelada ao scroll com GSAP Pinning
                 const scrubTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: heroSection,
+                        pin: true,           // Fixa a seção na tela
                         start: 'top top',
-                        end: 'bottom bottom',
-                        scrub: 1,
+                        end: '+=300%',       // Duração do scroll (equivalente a 400vh totais)
+                        scrub: 1,            // Suavização do scroll
                         invalidateOnRefresh: true,
                         onUpdate: (self) => {
                             // Update Indicator (01 -> 02 -> 03)
@@ -674,42 +672,47 @@
                     }
                 });
 
-                // 1. Anima o vídeo do frame 0 ao final
-                scrubTl.fromTo(video,
-                    { currentTime: 0 },
-                    { currentTime: video.duration - 0.1, ease: 'none' },
-                    0 // inicia no tempo 0 da timeline
-                );
+                // 1. Efeito visual no vídeo no lugar de scrub de tempo
+                // Fazemos um scale in dramático que vai do começo ao fim
+                scrubTl.to(video, { 
+                    scale: 1.15, 
+                    transformOrigin: "center center", 
+                    ease: "none" 
+                }, 0);
+
+                // Escurecemos o overlay para preparar a próxima seção
+                scrubTl.to('.hero-overlay', { 
+                    backgroundColor: "rgba(0,0,0,0.7)", 
+                    ease: "none" 
+                }, 0);
 
                 // 2. Anima os componentes da tela (Exibindo e Sumindo)
 
-                // Fade out do SCROLL TO CONTROL rapidamente no início do scroll
+                // Fade out do SCROLL TO CONTROL no início
                 scrubTl.to(heroScrollPrompt, { opacity: 0, duration: 0.1 }, 0);
 
-                // Fade out da Headline e Parágrafo após 25% do scroll
-                scrubTl.to('.hero-title, .hero-description', {
+                // Fade out e movimento para cima da Headline e Parágrafo
+                scrubTl.to('.hero-badge, .hero-title, .hero-description', {
                     opacity: 0,
-                    y: -40,
+                    y: -50,
                     duration: 0.2,
                     stagger: 0.05
-                }, 0.25);
+                }, 0.15);
 
-                // No final do scroll (perto de 80%), damos destaque aos botões centralizando-os
-                // Mas a estrutura pediu alinhado à esquerda. Vamos apenas fazer um fade out suave
-                // e trazer o indicador junto.
+                // Fade out das CTAs
                 scrubTl.to('.hero-ctas', {
                     opacity: 0,
-                    y: -20,
+                    y: -30,
                     duration: 0.15
-                }, 0.45);
+                }, 0.3);
+                
+                // Os outros 70% da timeline (0.3 ao final do scrub) 
+                // continuam escalando o vídeo de forma minimalista.
             }
 
-            // Garante que o ScrollTrigger só seja criado QUANDO o vídeo tiver os dados de duração
-            if (video.readyState >= 1) {
-                initVideoParallax();
-            } else {
-                video.addEventListener('loadedmetadata', initVideoParallax);
-            }
+            // Para esta técnica, não precisamos mais esperar o "loadeddata" para amarrar a duração,
+            // pois não usamos video.duration. Podemos engatilhar o parallax logo de cara.
+            initVideoParallax();
         } else if (prefersReducedMotion || isMobile) {
             // Autoplay on mobile or reduced motion
             video.autoplay = true;
