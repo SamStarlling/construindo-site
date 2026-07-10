@@ -11,8 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- CDN Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -29,6 +28,8 @@
             --charcoal: #1C1C1C;
             --muted: #71717A;
             --font-main: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
@@ -208,57 +209,81 @@
             position: absolute;
             top: 12%;
             left: 8%;
-            max-width: 600px;
+            max-width: 700px; /* Slightly wider for the new font sizes */
             z-index: 10;
             display: flex;
             flex-direction: column;
             justify-content: center;
             height: 80vh;
-            /* Centering helper within its constraints */
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+        }
+
+        .badge-text {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .hero-title {
             display: flex;
             flex-direction: column;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             gap: 0;
+            font-family: var(--font-display);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
         }
 
         .hero-title span {
             display: block;
-            line-height: 1.05;
         }
 
         .hero-title .line-1 {
-            font-weight: 800;
+            font-weight: 700;
             color: #FFFFFF;
-            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-size: clamp(3rem, 7vw, 5.5rem);
         }
 
         .hero-title .line-2 {
-            font-weight: 800;
-            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 700;
+            font-size: clamp(3rem, 7vw, 5.5rem);
             color: transparent;
-            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
-            letter-spacing: 3px;
+            -webkit-text-stroke: 1.5px #FFFFFF;
+            letter-spacing: 0;
         }
 
         .hero-title .line-3 {
-            font-weight: 800;
+            font-weight: 700;
             color: #FFFFFF;
-            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-size: clamp(3rem, 7vw, 5.5rem);
         }
 
         /* ==========================================
            6. PARÁGRAFO
            ========================================== */
         .hero-description {
-            font-weight: 400;
-            font-size: clamp(1rem, 1.4vw, 1.25rem);
+            font-family: var(--font-main);
+            font-weight: 300;
+            font-size: clamp(1.125rem, 1.5vw, 1.25rem);
             color: rgba(255, 255, 255, 0.8);
-            line-height: 1.7;
+            line-height: 1.6;
             max-width: 520px;
-            margin-top: 28px;
+            margin-top: 16px;
             margin-bottom: 40px;
         }
 
@@ -268,42 +293,50 @@
         .hero-ctas {
             display: flex;
             gap: 16px;
+            flex-wrap: wrap;
         }
 
         .btn-magnetic {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            height: 54px;
-            padding: 0 40px;
+            height: 56px;
+            padding: 0 32px;
             border-radius: 999px;
             cursor: pointer;
             text-decoration: none;
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            font-family: var(--font-main);
+            font-size: 14px;
+            letter-spacing: 0.05em;
             will-change: transform;
         }
 
         .btn-primary {
             background-color: #FFFFFF;
-            color: #000000;
+            color: #09090B;
             font-weight: 600;
             border: none;
+            box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
         }
 
         .btn-primary:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
         }
 
         .btn-secondary {
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.05);
             color: #FFFFFF;
             font-weight: 500;
-            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
         }
 
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-4px);
         }
 
         /* ==========================================
@@ -493,6 +526,12 @@
 
             <!-- CONTENT -->
             <div class="hero-content">
+                <!-- BADGE -->
+                <div class="hero-badge" aria-hidden="true">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">Precision Series</span>
+                </div>
+
                 <h1 class="hero-title" aria-label="A caneta mais tecnológica do mundo.">
                     <span class="line-1">A caneta</span>
                     <span class="line-2">mais tecnológica</span>
@@ -585,7 +624,8 @@
             // Header
             tl.from('header', { y: -30, opacity: 0, duration: 0.8 }, 0.2);
 
-            // Headline
+            // Headline & Badge
+            tl.from('.hero-badge', { y: 20, opacity: 0, duration: 0.8 }, 0.4);
             tl.from('.hero-title .line-1', { y: 60, opacity: 0, scale: 0.95, duration: 1.2 }, 0.6);
             tl.from('.hero-title .line-2', { y: 60, opacity: 0, scale: 0.95, duration: 1.2 }, 0.9);
             tl.from('.hero-title .line-3', { y: 60, opacity: 0, scale: 0.95, duration: 1.2 }, 1.2);
